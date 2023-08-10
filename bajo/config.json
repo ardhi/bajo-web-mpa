@@ -1,0 +1,11 @@
+{
+  "alias": "mpa",
+  "prefix": "",
+  "mountAppAsRoot": true,
+  "charset": "utf-8",
+  "viewEngine": "",
+  "nunjucks": {
+    "noCache": true
+  },
+  "dependencies": ["bajo-web"]
+}
