@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/ardhi/bajo-web-mpa#readme",
   "dependencies": {
+    "html-minifier-terser": "^7.2.0",
+    "jquery": "^3.7.0",
     "nunjucks": "^3.2.4"
   }
 }

@@ -1,4 +1,4 @@
-function assetsDir (plugin) {
+function assetsDir (env, plugin) {
   return this.bajoWebStatic.helper.assetsDir(plugin)
 }
 

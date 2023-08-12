@@ -7,5 +7,20 @@
   "nunjucks": {
     "noCache": true
   },
+  "minify": {
+    "enabled": false,
+    "options": {
+      "removeAttributeQuotes": true,
+      "removeComments": true,
+      "removeCommentsFromCDATA": true,
+      "removeCDATASectionsFromCDATA": true,
+      "collapseWhitespace": true,
+      "conservativeCollapse": true,
+      "decodeEntities": true,
+      "collapseBooleanAttributes": true,
+      "removeRedundantAttributes": true,
+      "removeEmptyAttributes": true
+    }
+  },
   "dependencies": ["bajo-web"]
 }

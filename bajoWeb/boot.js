@@ -1,6 +1,5 @@
 import decorate from '../lib/decorate.js'
 import viewEngine from '../lib/engine/view.js'
-import themeEngine from '../lib/engine/theme.js'
 import buildRoutes from '../lib/build-routes.js'
 
 async function boot () {
@@ -12,7 +11,6 @@ async function boot () {
   await this.bajoWeb.instance.register(async (ctx) => {
     await ctx.register(bodyParser)
     await viewEngine.call(this, ctx)
-    await themeEngine.call(this, ctx)
     await decorate.call(this, ctx)
     await buildRoutes.call(this, ctx)
   }, { prefix })

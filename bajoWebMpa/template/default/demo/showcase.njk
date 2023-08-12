@@ -1,11 +1,11 @@
-
+{% set t = getTheme() %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ theme.description }}</title>
+    <title>{{ t.description }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% for item in theme.css %}
+    {% for item in t.css %}
     <link rel="stylesheet" href="{{ item }}">
     {% endfor %}
     <link rel="stylesheet" href="{{ virtualsDir('bajoWebStatic') }}/prismjs/themes/prism-okaidia.css">
@@ -23,8 +23,8 @@
             <li class="nav-item dropdown" data-bs-theme="light">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="themes">Themes</a>
               <div class="dropdown-menu" aria-labelledby="themes">
-                {% for item in themes %}
-                <a class="dropdown-item" href="/demo/showcase/{{ item.name }}">{{ item.name | capitalize }}</a>
+                {% for item in getAllThemes() %}
+                <a class="dropdown-item" href="/mpa/demo/showcase/{{ item.name }}">{{ item.name | capitalize }}</a>
                 {% endfor %}
               </div>
             </li>
@@ -61,7 +61,7 @@
       <div class="page-header" id="banner">
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>{{ theme.description }}</h1>
+            <h1>{{ t.description }}</h1>
             <p class="lead">Silvery and sleek</p>
           </div>
           <div class="col-lg-4 col-md-5 col-sm-6">
@@ -1685,7 +1685,7 @@
         </div>
       </footer>
     </div>
-    {% for item in theme.script %}
+    {% for item in t.script %}
     <script src="{{ item }}"></script>
     {% endfor %}
     <script src="{{ virtualsDir('bajoWebStatic') }}/prismjs/prism.js" data-manual></script>
