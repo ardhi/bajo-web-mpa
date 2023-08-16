@@ -1,4 +1,7 @@
 [{
   "prefix": "jquery",
   "root": "node_modules/jquery/dist"
+}, {
+  "root": "node_modules/prismjs",
+  "prefix": "prismjs"
 }]
