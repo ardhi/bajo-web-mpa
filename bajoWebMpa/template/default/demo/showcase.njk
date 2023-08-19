@@ -8,8 +8,8 @@
     {% for item in t.css %}
     <link rel="stylesheet" href="{{ item }}">
     {% endfor %}
-    <link rel="stylesheet" href="{{ virtualsDir('bajoWebMpa') }}/prismjs/themes/prism-okaidia.css">
-    <link rel="stylesheet" href="{{ assetsDir('bajoWebMpaBootswatch') }}/css/custom.min.css">
+    <link rel="stylesheet" href="{{ virtualDir('bajoWebMpa') }}/prismjs/themes/prism-okaidia.css">
+    <link rel="stylesheet" href="{{ assetDir('bajoWebMpaBootswatch') }}/css/custom.min.css">
   </head>
   <body>
     <div class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark">
@@ -1688,7 +1688,7 @@
     {% for item in t.script %}
     <script src="{{ item }}"></script>
     {% endfor %}
-    <script src="{{ virtualsDir('bajoWebMpa') }}/prismjs/prism.js" data-manual></script>
-    <script src="{{ assetsDir('bajoWebMpaBootswatch') }}/js/custom.js"></script>
+    <script src="{{ virtualDir('bajoWebMpa') }}/prismjs/prism.js" data-manual></script>
+    <script src="{{ assetDir('bajoWebMpaBootswatch') }}/js/custom.js"></script>
   </body>
 </html>

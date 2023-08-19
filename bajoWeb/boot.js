@@ -11,6 +11,7 @@ async function boot () {
   const prefix = cfg.prefix
 
   await this.bajoWeb.instance.register(async (ctx) => {
+    this.bajoWebMpa.context = ctx
     await ctx.register(bodyParser)
     await error.call(this, ctx)
     await viewEngine.call(this, ctx)

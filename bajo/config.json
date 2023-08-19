@@ -2,6 +2,7 @@
   "alias": "mpa",
   "prefix": "",
   "mountAppAsRoot": true,
+  "auth": ["session"],
   "charset": "utf-8",
   "viewEngine": "",
   "nunjucks": {
