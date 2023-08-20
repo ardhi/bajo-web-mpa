@@ -5,13 +5,16 @@ import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
 
 async function boot () {
-  const { getConfig, importPkg } = this.bajo.helper
+  const { getConfig, importPkg, importModule } = this.bajo.helper
   const bodyParser = await importPkg('bajo-web:@fastify/formbody')
   const cfg = getConfig('bajoWebMpa')
   const prefix = cfg.prefix
+  const cfgWeb = getConfig('bajoWeb', { full: true })
+  const routeHook = await importModule(`${cfgWeb.dir}/lib/route-hook.js`)
 
   await this.bajoWeb.instance.register(async (ctx) => {
-    this.bajoWebMpa.context = ctx
+    this.bajoWebMpa.instance = ctx
+    await routeHook.call(this, ctx, 'bajoWebMpa')
     await ctx.register(bodyParser)
     await error.call(this, ctx)
     await viewEngine.call(this, ctx)
