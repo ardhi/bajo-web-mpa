@@ -1,5 +1,5 @@
-function routePath (env, name) {
-  return this.bajoWeb.helper.routePath(name)
+function routePath (env, name, query = {}) {
+  return this.bajoWeb.helper.routePath(name, { query })
 }
 
 export default routePath
