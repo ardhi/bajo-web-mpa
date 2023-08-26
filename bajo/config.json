@@ -5,8 +5,16 @@
   "auth": ["session"],
   "charset": "utf-8",
   "viewEngine": "",
+  "formatTagResult": true,
   "nunjucks": {
     "noCache": true
+  },
+  "prettier": {
+    "enabled": false,
+    "options": {
+      "parser": "html",
+      "printWidth": 200
+    }
   },
   "minify": {
     "enabled": false,

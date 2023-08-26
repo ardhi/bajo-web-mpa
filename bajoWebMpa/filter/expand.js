@@ -1,4 +1,4 @@
-function expand (obj) {
+function expand (ctx, obj) {
   const params = []
   for (const k in obj) {
     params.push(`${k}="${obj[k]}"`)
