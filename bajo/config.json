@@ -13,7 +13,7 @@
     "enabled": false,
     "options": {
       "parser": "html",
-      "printWidth": 200
+      "printWidth": 1000
     }
   },
   "minify": {

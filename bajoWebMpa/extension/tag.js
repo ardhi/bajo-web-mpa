@@ -1,9 +1,3 @@
-import fs from 'fs'
-
-let _ = {}
-
-// framework dependent
-
 class Tag {
   constructor (options) {
     this.scope = options.scope
@@ -12,11 +6,13 @@ class Tag {
 
   format (text) {
     // const all = text.match(/<([^<>]*)>/g)
-    const all = _.filter(text.split('\n').map(t => {
+    const { filter } = this.scope.bajoWebMpa.util
+    const all = filter(text.split('\n').map(t => {
       return t.replace(/\s\s+/g, ' ').replace('\r', '')
     }), a => !['', ' ', ' class=""', ' style=""'].includes(a))
     return all.join('\n')
       .replaceAll('class=" ', 'class="')
+      .replaceAll('style=""', '')
       .replaceAll('\n>', '>')
       .replace(/  +/g, ' ')
       .replaceAll(' >', '>')
@@ -29,36 +25,49 @@ class Tag {
 
   getAttr (name, context, args) {
     const { isSet } = this.scope.bajo.helper
+    const { omit, kebabCase, get, keys } = this.scope.bajoWebMpa.util
     const omitAttr = {
       value: ['textarea'],
       type: ['button'],
+      label: ['label'],
       sizing: true, // true => omitted on all tags
       plaintext: true,
       options: true,
       variant: true,
       outline: true,
-      err: true,
+      error: true,
+      success: true,
+      active: true,
+      check: true,
+      radio: true,
       tag: true
     }
+    const pickAttr = {
+      caption: ['table']
+    }
 
-    let attr = _.omit(args.pop() ?? {}, ['__keywords'])
-    const params = [...args].filter(a => typeof a === 'string').map(a => _.kebabCase(a))
+    let attr = omit(args.pop() ?? {}, ['__keywords'])
+    const params = [...args].filter(a => typeof a === 'string').map(a => kebabCase(a))
     let attributes = []
     const deleted = []
     if (name === 'form-input' && attr.inputPlaintext) attr.inputReadonly = true
     for (const k in attr) {
-      if (!isSet(attr[k])) deleted.push(k)
+      if (!isSet(attr[k])) {
+        deleted.push(k)
+        continue
+      }
       if (['class', 'style', 'classBase'].includes(k) || !isSet(attr[k])) continue
       if (omitAttr[k] === true || (omitAttr[k] ?? []).includes(name)) continue
-      const key = _.kebabCase(k)
+      if (pickAttr[k] && !pickAttr[k].includes(name)) continue
+      const key = kebabCase(k)
       attributes.push(attr[k] === true ? `${key}` : `${key}="${attr[k]}"`)
     }
     attributes = attributes.join(' ')
-    attr = _.omit(attr, deleted)
+    attr = omit(attr, deleted)
     if (attr.class) attr.class = ' ' + attr.class
     if (attr.sizing) {
-      const sizing = _.get(context, 'ctx.theme.mapping.sizing', {})
-      if (_.keys(sizing).includes(attr.sizing)) attr.sizing = sizing[attr.sizing]
+      const sizing = get(context, 'ctx.theme.mapping.sizing', {})
+      if (keys(sizing).includes(attr.sizing)) attr.sizing = sizing[attr.sizing]
       else delete attr.sizing
     }
     return { attr, attributes, params }
@@ -76,11 +85,12 @@ class Tag {
 
   run (context, ...args) {
     // const callback = args.pop()
+    const { kebabCase, fs } = this.scope.bajoWebMpa.util
     const { resolveTagPath } = this.scope.bajoWebMpa.helper
     const { getConfig } = this.scope.bajo.helper
     const cfg = getConfig('bajoWebMpa')
     const body = args.pop()
-    const name = _.kebabCase(args.shift())
+    const name = kebabCase(args.shift())
     const { attr, attributes, params } = this.getAttr(name, context, args)
     const file = resolveTagPath(name, context.ctx.theme, true)
     const { theme, themes } = context.ctx
@@ -95,9 +105,6 @@ class Tag {
 }
 
 async function tag () {
-  const { importPkg } = this.bajo.helper
-  const { kebabCase, omit, mapValues, keys, get, filter } = await importPkg('lodash-es')
-  _ = { kebabCase, omit, mapValues, keys, get, filter }
   return new Tag({ scope: this })
 }
 
