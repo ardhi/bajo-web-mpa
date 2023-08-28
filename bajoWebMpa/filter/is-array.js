@@ -1,5 +1,6 @@
 function isString (ctx, obj) {
-  return Array.isArray(obj)
+  const { isArray } = this.bajoWebMpa.util
+  return isArray(obj)
 }
 
 export default isString

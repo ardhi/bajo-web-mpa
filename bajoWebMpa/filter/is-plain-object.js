@@ -1,5 +1,6 @@
 function isPlainObject (ctx, obj) {
-  return typeof obj === 'object' && obj !== null && !Array.isArray(obj)
+  const { isPlainObject } = this.bajoWebMpa.util
+  return isPlainObject(obj)
 }
 
 export default isPlainObject

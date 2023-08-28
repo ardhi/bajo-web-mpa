@@ -1,5 +1,6 @@
 function isString (ctx, obj) {
-  return typeof obj === 'string'
+  const { isString } = this.bajoWebMpa.util
+  return isString(obj)
 }
 
 export default isString
