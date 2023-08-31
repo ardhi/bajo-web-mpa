@@ -5,6 +5,7 @@
   "auth": ["session"],
   "charset": "utf-8",
   "viewEngine": "",
+  "theme": "",
   "formatTagResult": true,
   "nunjucks": {
     "noCache": true
