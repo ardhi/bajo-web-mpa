@@ -1,4 +1,4 @@
-function isEmpty (ctx, obj) {
+function isEmpty (env, obj) {
   const { isEmpty } = this.bajoWebMpa.util
   return isEmpty(obj)
 }

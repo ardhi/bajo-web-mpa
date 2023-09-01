@@ -1,4 +1,4 @@
-function ternary (ctx, arr = [], needle) {
+function ternary (env, arr = [], needle) {
   return arr.includes(needle)
 }
 

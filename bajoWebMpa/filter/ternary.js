@@ -1,4 +1,4 @@
-function ternary (ctx, condition, left, right) {
+function ternary (env, condition, left, right) {
   return condition ? left : right
 }
 

@@ -1,4 +1,4 @@
-function isPlainObject (ctx, obj) {
+function isPlainObject (env, obj) {
   const { isPlainObject } = this.bajoWebMpa.util
   return isPlainObject(obj)
 }

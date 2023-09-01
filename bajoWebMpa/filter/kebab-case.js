@@ -1,4 +1,4 @@
-function kebabCase (ctx, text) {
+function kebabCase (env, text) {
   return this.bajoWebMpa.util.kebabCase(text)
 }
 

@@ -10,8 +10,9 @@ const boot = {
     const { getConfig, importPkg, importModule, runHook } = this.bajo.helper
     const bodyParser = await importPkg('bajo-web:@fastify/formbody')
     const cfg = getConfig('bajoWebMpa')
-    const prefix = cfg.prefix
     const cfgWeb = getConfig('bajoWeb', { full: true })
+    let prefix = cfg.prefix === '' ? '' : ('/' + cfg.prefix)
+    if (cfg.i18nDetectors.includes('path')) prefix = `/:lang${prefix}`
     const routeHook = await importModule(`${cfgWeb.dir}/lib/route-hook.js`)
     await this.bajoWeb.instance.register(async (ctx) => {
       this.bajoWebMpa.instance = ctx
