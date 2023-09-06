@@ -1,0 +1,6 @@
+{{ attr.docType|d('<!doctype html>') }}
+<html
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {{- content|safe -}}
+</html>

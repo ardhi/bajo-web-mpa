@@ -1,5 +1,5 @@
 import format from '../../lib/tag/format.js'
-import defGetAttr from '../../lib/tag/get-attr.js'
+import getAttr from '../../lib/tag/get-attr.js'
 
 class Tag {
   constructor (options) {
@@ -27,9 +27,9 @@ class Tag {
     const name = kebabCase(args.shift())
     const file = resolveTagPath(name, context.ctx.theme, true)
     const { theme, themes } = context.ctx
-    let getAttr = get(this.scope, `${theme.plugin}.helper.getAttr.exec`)
-    if (!getAttr) getAttr = defGetAttr
-    const { attr, attributes, params } = getAttr.call(this, theme.name, { name, context, args })
+    let handler = get(this.scope, `${theme.plugin}.helper.getAttrHandler.exec`)
+    if (handler) handler = handler(theme.name)
+    const { attr, attributes, params } = getAttr.call(this, theme.name, { name, context, args }, handler)
     const locals = { tag: name, params, attr, attributes, content: body(), theme, themes }
     const fragment = fs.readFileSync(file, 'utf8').replaceAll('\r', '') // TODO: replace new line inside the brackets only
     const ret = context.env.renderString(fragment, locals)

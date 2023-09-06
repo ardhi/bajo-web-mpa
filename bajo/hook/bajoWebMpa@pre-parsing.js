@@ -6,6 +6,8 @@ const bajoWebMpaPreHandler = {
     const cfgWeb = getConfig('bajoWeb', { full: true })
     const attachI18N = await importModule(`${cfgWeb.dir}/lib/attach-i18n.js`)
     await attachI18N.call(this, cfg.i18nDetectors, req, reply)
+    // darkmode
+    if (cfg.darkMode.qsKey) req.dark = req.query[cfg.darkMode.qsKey] ? 'dark' : 'light'
   }
 }
 

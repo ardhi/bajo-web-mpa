@@ -6,6 +6,10 @@
   "charset": "utf-8",
   "viewEngine": "",
   "theme": "",
+  "darkMode": {
+    "preset": "light",
+    "qsKey": "dark"
+  },
   "formatTagResult": true,
   "nunjucks": {
     "noCache": true

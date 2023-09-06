@@ -1,4 +1,8 @@
 import fs from 'fs'
+import path from 'path'
+
+const selfClosing = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+  'link', 'meta', 'param', 'source', 'track', 'wbr']
 
 function resolveTagPath (name, theme, useCustom) {
   const { getConfig } = this.bajo.helper
@@ -17,7 +21,8 @@ function resolveTagPath (name, theme, useCustom) {
   }
   if (!fs.existsSync(item)) {
     if (!useCustom) return
-    item = `${dir}/bajoWebMpa/tag/_custom.njk`
+    const base = path.basename(item, path.extname(item))
+    item = `${dir}/bajoWebMpa/tag/${selfClosing.includes(base) ? '_any-void.njk' : '_any.njk'}`
   }
   return item
 }
