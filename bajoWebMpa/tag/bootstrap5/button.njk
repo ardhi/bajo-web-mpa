@@ -1,0 +1,22 @@
+{%- set variant = attr.variant|ternary(' btn-' + attr.outline|ternary('outline-', '') + attr.variant, '') -%}
+{%- set href = attr.href|d('#') -%}
+<{{ attr.tag|d('button') }}
+    class="{{ attr.classBase|d('btn') }}{{ variant }}{% if attr.sizing %} btn-{{ attr.sizing }}{% endif %}{% if attr.tag === 'a' and attr.disabled %} disabled{% endif %}{% if attr.active %} active{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    type="{{ attr.type|d('button') }}"
+    {%- if attr.tag === 'a' %}
+        {% if attr.disabled %}tabindex="-1" aria-disabled="true"
+        {% else %}
+        href="{{ href }}"
+        {% endif %}
+        role="button"
+    {% endif -%}
+    {% if attr.tag === 'input' %}value="{{- attr.caption -}}"{% endif %}
+    {% if attr.active %}aria-current="page"{% endif %}
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {% if attr.icon %}{% tag 'icon', name=attr.icon, margin='end2' %}{% endtag %}{% endif %}
+    {%- if attr.tag !== 'input' -%}
+    {{- attr.caption|d(content|safe) -}}
+    </{{ attr.tag|d('button') }}>
+    {%- endif %}

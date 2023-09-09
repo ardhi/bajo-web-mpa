@@ -1,0 +1,7 @@
+<div
+    class="collapse navbar-collapse{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {{- content|safe -}}
+    </div>

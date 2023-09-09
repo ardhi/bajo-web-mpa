@@ -1,0 +1,5 @@
+<input
+    class="{{ attr.classBase|d('form-control') }}{% if attr.plaintext %}-plaintext{% endif %}{% if attr.sizing %} form-control-{{ attr.sizing }}{% endif %}{% if attr.error %} is-invalid{% elif attr.success %} is-valid{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>

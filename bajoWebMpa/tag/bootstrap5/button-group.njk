@@ -1,0 +1,51 @@
+<div
+    class="btn-group{% if attr.vertical %}-vertical{% endif %}{% if attr.sizing %} btn-group-{{ attr.sizing }}{% endif %}{{ attr.class}}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') }}
+    role="group"
+    aria-label="{{ attr.ariaLabel }}">
+    {% if attr.options %}
+    {% if attr.check %}
+    {% for item in attr.options %}
+    {% set id = item.id|d(attr.id|ternary(attr.id + '-' + loop.index, generateId())) %}
+    {% tag 'check',
+        id=id,
+        classBase='btn-check',
+        autocomplete='off' %}{% endtag %}
+    {% tag 'label',
+        for=id,
+        classBase='btn',
+        class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')),
+        caption=item.caption %}{{ item.caption }}{% endtag %}
+    {% endfor %}
+    {% elif attr.radio %}
+    {% set name = attr.name|d(generateId()) %}
+    {% for item in attr.options %}
+    {% set id = item.id|d(attr.id|ternary(attr.id + '-' + loop.index, generateId())) %}
+    {% tag 'radio',
+        id=id,
+        name=name,
+        classBase='btn-check',
+        autocomplete='off' %}{% endtag %}
+    {% tag 'label',
+        for=id,
+        classBase='btn',
+        class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')),
+        caption=item.caption %}{{ item.caption }}{% endtag %}
+    {% endfor %}
+    {% else %}
+    {% for item in attr.options %}
+    {% tag 'button',
+        id=item.id,
+        outline=attr.outline,
+        variant=item.variant|d(attr.variant|d('primary')),
+        caption=item.caption,
+        active=item.active,
+        tag=item.tag %}{% endtag %}
+    {% endfor %}
+    {% endif %}
+    {% else %}
+    {{- content|safe -}}
+    {% endif %}
+</div>

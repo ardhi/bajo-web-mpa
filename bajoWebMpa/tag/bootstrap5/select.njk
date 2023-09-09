@@ -1,0 +1,21 @@
+<select
+    class="{{ attr.classBase|d('form-select') }}{% if attr.sizing %} form-control-{{ attr.sizing }}{% endif %}{% if attr.error %} is-invalid{% elif attr.success %} is-valid{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {%- if attr.options|isPlainObject -%}
+    {%- for value, key in attr.options -%}
+    <option value="{{ value }}">{{ key }}</option>
+    {%- endfor -%}
+    {%- else -%}
+    {%- for opt in attr.options -%}
+    {%- if opt|isString -%}
+    <option value="{{ opt }}"></option>
+    {%- elif opt|isArray -%}
+    <option value="{{ opt[0] }}"{% if opt[2] %} selected{% endif %}>{{ opt[1] }}</option>
+    {%- else -%}
+    <option value="{{ opt.value }}"{% if opt.selected %} selected{% endif %}>{{ opt.text|d(opt.value) }}</option>
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+    </select>

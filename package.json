@@ -1,6 +1,6 @@
 {
   "name": "bajo-web-mpa",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "MPA Web Server Plugin for Bajo Framework",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,9 @@
   },
   "homepage": "https://github.com/ardhi/bajo-web-mpa#readme",
   "dependencies": {
+    "bootstrap-icons": "^1.10.5",
+    "bootstrap4": "npm:bootstrap@^4.6.2",
+    "bootstrap5": "npm:bootstrap@^5.3.1",
     "html-minifier-terser": "^7.2.0",
     "jquery": "^3.7.0",
     "nunjucks": "^3.2.4",

@@ -1,1 +1,12 @@
-{{ message }}
+{% extends 'bajoWebMpa:/layout/center' %}
+
+{% block css %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block body %}
+{% tag 'h1', displayHeading=1 %}404{% endtag %}
+{% tag 'h6', displayHeading=6 %}{{ 'Page not found'|t }}{% endtag %}
+{% endblock %}

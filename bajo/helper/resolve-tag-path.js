@@ -17,12 +17,12 @@ function resolveTagPath (name, theme, useCustom) {
   }
   if (!fs.existsSync(item)) { // is it in framework?
     dir = getConfig('bajoWebMpa', { full: true }).dir
-    item = `${dir}/bajoWebMpa/tag/${name}.njk`
+    item = `${dir}/bajoWebMpa/tag/common/${name}.njk`
   }
   if (!fs.existsSync(item)) {
     if (!useCustom) return
     const base = path.basename(item, path.extname(item))
-    item = `${dir}/bajoWebMpa/tag/${selfClosing.includes(base) ? '_any-void.njk' : '_any.njk'}`
+    item = `${dir}/bajoWebMpa/tag/common/${selfClosing.includes(base) ? '_any-void.njk' : '_any.njk'}`
   }
   return item
 }

@@ -1,0 +1,28 @@
+{% if attr.useNav %}
+<a
+    class="nav-link{% if attr.active %} active{% endif %}{% if attr.disabled %} disabled{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    href="{{ attr.href|d('#') }}"
+    {% if attr.active %}aria-current="page"{% endif %}
+    {% if attr.disabled %}aria-disabled="true"{% endif %}
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {% if attr.icon %}{% tag 'icon', name=attr.icon %}{% endtag %}{% endif %}
+    {{- attr.caption|d(content|safe) -}}
+    </a>
+{% else %}
+<li
+    class="nav-item">
+    <a
+        class="nav-link{% if attr.active %} active{% endif %}{% if attr.disabled %} disabled{% endif %}{{ attr.class }}"
+        style="{{ attr.style }}"
+        href="{{ attr.href|d('#') }}"
+        {% if attr.active %}aria-current="page"{% endif %}
+        {% if attr.disabled %}aria-disabled="true"{% endif %}
+        {{ attributes|safe -}}
+        {{ params|join(' ') -}}>
+        {% if attr.icon %}{% tag 'icon', name=attr.icon %}{% endtag %}{% endif %}
+        {{- attr.caption|d(content|safe) -}}
+        </a>
+    </li>
+{% endif %}

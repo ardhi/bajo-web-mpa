@@ -1,0 +1,9 @@
+{% set tr = 'position-absolute top-0 start-100 translate-middle ' %}
+<span
+    class="{% if attr.topRight %}{{ tr }}{% endif %}badge{% if attr.pill %} rounded-pill{% endif %}{% if attr.variant %} {{ attr.variantText|ternary('text-', '') }}bg-{{ attr.variant }}{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {{- attr.content|d(content|safe) -}}
+    {% if attr.topRight|isString %}<span class="visually-hidden">{{ attr.topRight }}</span>{% endif %}
+    </span>

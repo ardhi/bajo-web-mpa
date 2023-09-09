@@ -1,0 +1,7 @@
+<div
+    class="col{% if not attr.columns|isEmpty %}{{ attr.columns|join(' col') }}{% else %}{% if attr.width or attr.sizing %}{% if attr.sizing %}-{{ attr.sizing }}{% endif %}{% if attr.width %}-{{ attr.width }}{% endif %}{% endif %}{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {{- attr.content|d(content|safe) -}}
+    </div>

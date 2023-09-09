@@ -1,0 +1,8 @@
+<a
+    class="card-link{{ attr.class }}"
+    style="{{ attr.style }}"
+    href="{{ attr.href|d('#') }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {{- attr.content|d(content|safe) -}}
+    </a>

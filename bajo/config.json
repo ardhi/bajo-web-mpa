@@ -5,7 +5,7 @@
   "auth": ["session"],
   "charset": "utf-8",
   "viewEngine": "",
-  "theme": "",
+  "theme": "bootstrap5",
   "darkMode": {
     "preset": "light",
     "qsKey": "dark"
@@ -37,5 +37,9 @@
       "removeEmptyAttributes": true
     }
   },
-  "dependencies": ["bajo-web"]
+  "siteInfo": {
+    "title": "My Website",
+    "orgName": "My Organization"
+  },
+  "dependencies": ["bajo-web", "bajo-web-static"]
 }

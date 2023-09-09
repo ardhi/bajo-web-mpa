@@ -1,0 +1,14 @@
+<ol
+    class="list-group{% if attr.flush %} list-group-flush{% endif %}{% if attr.numbered %} list-group-numbered{% endif %}{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+      {% for o in attr.options %}
+      {% tag 'listGroupItem', href=o.href, active=o.active, disabled=o.disabled, icon=o.icon %}
+        {{ o.caption }}
+        {% if o.children|length > 0 %}
+          {% tag 'treeGroup', options=o.children, numbered=attr.numbered %}{% endtag %}
+        {% endif %}
+      {% endtag%}
+      {% endfor %}
+    </ol>

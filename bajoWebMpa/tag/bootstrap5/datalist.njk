@@ -1,0 +1,21 @@
+<datalist
+    class="{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {%- if attr.options|isPlainObject -%}
+    {%- for value, key in attr.options -%}
+    <option value="{{ value }}">{{ key }}</option>
+    {%- endfor -%}
+    {%- else -%}
+    {%- for opt in attr.options -%}
+    {%- if opt|isString -%}
+    <option value="{{ opt }}"></option>
+    {%- elif opt|isArray -%}
+    <option value="{{ opt[0] }}">{{ opt[1] }}</option>
+    {%- else -%}
+    <option value="{{ opt.value }}">{{ opt.text }}</option>
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+    </datalist>

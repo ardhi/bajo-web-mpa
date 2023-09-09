@@ -1,0 +1,33 @@
+{% set textarea %}
+  {% tag 'textarea',
+    class=attr.class,
+    style=attr.style,
+    id=attr.id,
+    name=attr.name,
+    type=attr.type,
+    ariaDescribedby=attr.helpId|d(attr.id + '-help') + attr.error|ternary(' ' + attr.id + '-invalid', ''),
+    disabled=attr.disabled,
+    readonly=attr.readonly,
+    required=attr.required,
+    placeholder=attr.placeholder|d(attr.label),
+    sizing=attr.sizing,
+    value=attr.value,
+    error=attr.error,
+    success=attr.success,
+    rows=attr.rows,
+    plaintext=attr.plaintext %}{% endtag %}
+{% endset %}
+{% tag 'div',
+    class=attr.labelFloating|ternary('form-floating ', '') + attr.wrapperClass|d('mb3'),
+    style=attr.wrapperStyle,
+    id=attr.wrapperId %}
+  {% if attr.labelFloating %}
+    {{ textarea }}
+    {% include 'tag:_form-label:bootstrap5' %}
+  {% else %}
+    {% include 'tag:_form-label:bootstrap5' %}
+    {{ textarea }}
+  {% endif %}
+  {% include 'tag:_form-feedback:bootstrap5' %}
+  {% include 'tag:_form-help:bootstrap5' %}
+{% endtag %}

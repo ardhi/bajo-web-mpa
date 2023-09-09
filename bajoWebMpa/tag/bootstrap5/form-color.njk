@@ -1,0 +1,21 @@
+{% tag 'div',
+    class=attr.wrapperClass|d('mb3'),
+    style=attr.wrapperStyle,
+    id=attr.wrapperId %}
+   {% include 'tag:_form-label:bootstrap5' %}
+  {% tag 'color',
+    class=attr.class,
+    style=attr.style,
+    id=attr.id,
+    name=attr.name,
+    ariaDescribedby=attr.helpId|d(attr.id + '-help') + attr.error|ternary(' ' + attr.id + '-invalid', ''),
+    disabled=attr.disabled,
+    readonly=attr.readonly,
+    placeholder=attr.placeholder,
+    value=attr.value,
+    error=attr.error,
+    success=attr.success,
+    sizing=attr.sizing %}{% endtag %}
+  {% include 'tag:_form-feedback:bootstrap5' %}
+  {% include 'tag:_form-help:bootstrap5' %}
+{% endtag %}

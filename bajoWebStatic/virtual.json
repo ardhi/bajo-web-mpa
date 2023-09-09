@@ -4,4 +4,13 @@
 }, {
   "root": "node_modules/prismjs",
   "prefix": "prismjs"
+}, {
+  "prefix": "bs5",
+  "root": "node_modules/bootstrap5/dist"
+}, {
+  "prefix": "bs4",
+  "root": "node_modules/bootstrap4/dist"
+}, {
+  "prefix": "icons",
+  "root": "node_modules/bootstrap-icons"
 }]
