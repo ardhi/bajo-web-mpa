@@ -29,7 +29,7 @@ class Tag {
     let name = args.shift()
     if (!excludes.includes(name)) name = kebabCase(name)
     const file = resolveTagPath(name, context.ctx.theme, true)
-    const { theme, themes } = context.ctx
+    const { theme, themes, site, user, lang, darkMode, reqParams, reqQuery, ns } = context.ctx
     let handler = get(this.scope, `${theme.plugin}.helper.getAttrHandler.exec`)
     let themeName = theme.name
     if (!handler) {
@@ -39,7 +39,7 @@ class Tag {
     }
     if (handler) handler = handler(themeName)
     const { attr, attributes, params } = getAttr.call(this, theme.name, { name, context, args }, handler)
-    const locals = { tag: name, params, attr, attributes, content: body(), theme, themes }
+    const locals = { tag: name, params, attr, attributes, content: body(), theme, themes, site, user, lang, darkMode, reqParams, reqQuery, ns }
     const fragment = fs.readFileSync(file, 'utf8').replaceAll('\r', '') // TODO: replace new line inside the brackets only
     const ret = context.env.renderString(fragment, locals)
     /*

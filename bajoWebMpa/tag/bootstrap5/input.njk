@@ -1,5 +1,5 @@
 <input
-    class="{{ attr.classBase|d('form-control') }}{% if attr.plaintext %}-plaintext{% endif %}{% if attr.sizing %} form-control-{{ attr.sizing }}{% endif %}{% if attr.error %} is-invalid{% elif attr.success %} is-valid{% endif %}{{ attr.class }}"
+    class="{% if attr.type !== 'hidden' %}{{ attr.classBase|d('form-control') }}{% if attr.plaintext %}-plaintext{% endif %}{% if attr.sizing %} form-control-{{ attr.sizing }}{% endif %}{% if attr.error %} is-invalid{% elif attr.success %} is-valid{% endif %}{{ attr.class }}{% endif %}"
     style="{{ attr.style }}"
     {{ attributes|safe -}}
     {{ params|join(' ') -}}>

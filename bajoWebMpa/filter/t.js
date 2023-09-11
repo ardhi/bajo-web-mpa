@@ -1,10 +1,11 @@
 function t (env, msg, ...args) {
-  const { isPlainObject } = this.bajoWebMpa.util
-  const { i18n, tpl } = env.ctx
+  const { isArray, isPlainObject, merge } = this.bajoWebMpa.util
+  let { i18n, ns } = env.ctx
   if (!i18n) return msg
-  const opts = isPlainObject(args[args.length - 1]) ? args.pop() : {}
-  const ns = opts.ns ?? tpl.split(':')[0]
-  if (isPlainObject(args[0])) return i18n.t(msg, args[0])
+  if (!isArray(ns)) ns = [ns]
+  if (!ns.includes('bajoDb')) ns.push('bajoDb')
+  if (!ns.includes('bajoWebMpa')) ns.push('bajoWebMpa')
+  if (isPlainObject(args[0])) return i18n.t(msg, merge({}, args[0] ?? {}, { ns }))
   return i18n.t(msg, { ns, postProcess: 'sprintf', sprintf: args })
 }
 

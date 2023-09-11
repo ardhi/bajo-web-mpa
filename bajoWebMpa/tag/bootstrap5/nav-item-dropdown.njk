@@ -1,0 +1,12 @@
+{% tag 'navItem',
+    classBase='nav-item dropdown',
+    class='dropdown-toggle',
+    dataBsToggle='dropdown',
+    role='button',
+    icon=attr.icon,
+    style=attr.style,
+    caption=attr.caption,
+    onParent=attr.onParent,
+    ariaExpanded='false' %}
+    {% tag 'dropdownMenu', class=attr.menuClass, style=attr.menuStyle, options=attr.options %}{% endtag %}
+    {% endtag %}

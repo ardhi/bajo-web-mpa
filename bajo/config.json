@@ -41,5 +41,9 @@
     "title": "My Website",
     "orgName": "My Organization"
   },
+  "home": {
+    "action": "redirect",
+    "route": true
+  },
   "dependencies": ["bajo-web", "bajo-web-static"]
 }

@@ -1,0 +1,23 @@
+<ul
+    class="dropdown-menu{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {%- if attr.options|isPlainObject -%}
+    {%- for value, key in attr.options -%}
+    <li><a class="dropdown-item" href="{{ value }}">{{ key }}</a></li>
+    {%- endfor -%}
+    {%- else -%}
+    {%- for opt in attr.options -%}
+    {%- if opt === '-' -%}
+    <li><hr class="dropdown-divider"></li>
+    {%- elif opt|isString -%}
+    <li><a class="dropdown-item" href="#">{{ opt }}</a></li>
+    {%- elif opt|isArray -%}
+    <li><a class="dropdown-item" href="{{ opt[0] }}">{{ opt[1] }}</a></li>
+    {%- else -%}
+    <li><a class="dropdown-item" href="{{ opt.value }}">{{ opt.text }}</a></li>
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+    </ul>

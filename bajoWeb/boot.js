@@ -4,6 +4,7 @@ import buildRoutes from '../lib/build-routes.js'
 import subApp from '../lib/sub-app.js'
 import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
+import home from '../lib/home.js'
 
 const boot = {
   level: 10,
@@ -25,6 +26,7 @@ const boot = {
       await decorate.call(this, ctx)
       await subApp.call(this, ctx)
       await buildRoutes.call(this, ctx)
+      await home.call(this, ctx)
       await notFound.call(this, ctx)
     }, { prefix })
   }

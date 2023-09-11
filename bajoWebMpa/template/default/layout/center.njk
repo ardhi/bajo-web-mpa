@@ -14,15 +14,15 @@
     {% tag 'div', display='flex', flex='column', justifyContent='center', alignItems='center', style='height:100vh' %}
       {% tag 'div', text='center' %}
         {% tag 'header', margin='bottom5', padding='bottom5', heading=5 %}
-        {{ site.title|d(siteInfo.title) }}
+        {{ site.title|d(getConfig('bajoWebMpa').siteInfo.title) }}
         {% endtag %}
         {% block body %}
         {% endblock %}
-        {% tag 'button', margin='top3', tag='a', variant='primary', href='/', icon='home' %}
+        {% tag 'button', margin='top3', tag='a', variant='link', href='/', icon='home' %}
           {{ 'Home'|t }}
         {% endtag %}
         {% tag 'footer', margin='top5', padding='top5' %}
-        {{ '&copy; %s %s. All rights reserved'|t(2023, site.orgName|d(siteInfo.orgName)) }}
+        {{ '&copy; %s %s. All rights reserved'|t(2023, site.orgName|d(getConfig('bajoWebMpa').siteInfo.orgName)) }}
         {% endtag %}
       {% endtag %}
     {% endtag %}

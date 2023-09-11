@@ -18,7 +18,7 @@
     plaintext=attr.plaintext %}{% endtag %}
 {% endset %}
 {% tag 'div',
-    class=attr.labelFloating|ternary('form-floating ', '') + attr.wrapperClass|d('mb3'),
+    class=attr.labelFloating|ternary('form-floating ', '') + attr.wrapperClass|d('mb-3'),
     style=attr.wrapperStyle,
     id=attr.wrapperId %}
   {% if attr.labelFloating %}
