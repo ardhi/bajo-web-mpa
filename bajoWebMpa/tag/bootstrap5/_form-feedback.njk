@@ -1,7 +1,0 @@
-{% if attr.error|isString or attr.success|isString %}
-  {% tag 'div',
-    class=attr.error|ternary('invalid-feedback', 'valid-feedback'),
-    id=attr.id + '-invalid' %}
-    {{- attr.error|ternary(attr.error, attr.success) -}}
-  {% endtag %}
-{% endif %}

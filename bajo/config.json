@@ -37,10 +37,6 @@
       "removeEmptyAttributes": true
     }
   },
-  "siteInfo": {
-    "title": "My Website",
-    "orgName": "My Organization"
-  },
   "home": {
     "action": "redirect",
     "route": true

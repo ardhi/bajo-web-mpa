@@ -13,4 +13,7 @@
 }, {
   "prefix": "icons",
   "root": "node_modules/bootstrap-icons"
+}, {
+  "prefix": "masonry",
+  "root": "node_modules/masonry-layout/dist"
 }]

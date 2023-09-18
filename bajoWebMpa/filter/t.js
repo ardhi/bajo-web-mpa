@@ -1,6 +1,6 @@
 function t (env, msg, ...args) {
   const { isArray, isPlainObject, merge } = this.bajoWebMpa.util
-  let { i18n, ns } = env.ctx
+  let { i18n, ns } = env.ctx._meta
   if (!i18n) return msg
   if (!isArray(ns)) ns = [ns]
   if (!ns.includes('bajoDb')) ns.push('bajoDb')

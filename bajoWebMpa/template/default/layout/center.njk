@@ -1,34 +1,33 @@
-{%- set siteInfo = getConfig('bajoWebMpa').siteInfo -%}
-{% tag 'html', lang=lang, dataBsTheme=darkMode %}
-  {% tag 'head' %}
-    {% tag 'meta', charset='utf-8' %}{% endtag %}
-    {% tag 'meta', name='viewport', content='width=device-width, initial-scale=1' %}{% endtag %}
-    {% tag 'title'%}{{ site.title|d(siteInfo.title) }}{% endtag %}
-    {% for c in theme.css %}
-      {% tag 'link', rel='stylesheet', href=c %}{% endtag %}
+{% cmp 'html', lang=_meta.lang, dataBsTheme=_meta.darkMode %}
+  {% cmp 'head' %}
+    {% cmp 'meta', charset='utf-8' %}{% endcmp %}
+    {% cmp 'meta', name='viewport', content='width=device-width, initial-scale=1' %}{% endcmp %}
+    {% cmp 'title'%}{{ _meta.site.title }}{% endcmp %}
+    {% for c in _meta.theme.css %}
+      {% cmp 'link', rel='stylesheet', href=c %}{% endcmp %}
     {% endfor %}
-    {% tag 'link', rel='stylesheet', href=assetDir('bajoWebBook') + '/css/book.css' %}{% endtag %}
+    {% cmp 'link', rel='stylesheet', href=assetDir('bajoWebBook') + '/css/book.css' %}{% endcmp %}
     {% block css %}{% endblock %}
-  {% endtag %}
-  {% tag 'body', padding=0, margin=0 %}
-    {% tag 'div', display='flex', flex='column', justifyContent='center', alignItems='center', style='height:100vh' %}
-      {% tag 'div', text='center' %}
-        {% tag 'header', margin='bottom5', padding='bottom5', heading=5 %}
-        {{ site.title|d(getConfig('bajoWebMpa').siteInfo.title) }}
-        {% endtag %}
+  {% endcmp %}
+  {% cmp 'body', padding=0, margin=0 %}
+    {% cmp 'div', display='flex', flex='column', justifyContent='center', alignItems='center', style='height:100vh' %}
+      {% cmp 'div', text='center' %}
+        {% cmp 'header', margin='bottom5', padding='bottom5', heading=5 %}
+        {{ _meta.site.title }}
+        {% endcmp %}
         {% block body %}
         {% endblock %}
-        {% tag 'button', margin='top3', tag='a', variant='link', href='/', icon='home' %}
+        {% cmp 'button', margin='top3', tag='a', variant='link', href='/', icon='home' %}
           {{ 'Home'|t }}
-        {% endtag %}
-        {% tag 'footer', margin='top5', padding='top5' %}
-        {{ '&copy; %s %s. All rights reserved'|t(2023, site.orgName|d(getConfig('bajoWebMpa').siteInfo.orgName)) }}
-        {% endtag %}
-      {% endtag %}
-    {% endtag %}
-    {% for s in theme.script %}
-      {% tag 'script', src=s %}{% endtag %}
+        {% endcmp %}
+        {% cmp 'footer', margin='top5', padding='top5' %}
+        {{ '&copy; %s %s. All rights reserved'|t(2023, _meta.site.orgName) }}
+        {% endcmp %}
+      {% endcmp %}
+    {% endcmp %}
+    {% for s in _meta.theme.script %}
+      {% cmp 'script', src=s %}{% endcmp %}
     {% endfor %}
     {% block script %}{% endblock %}
-  {% endtag %}
-{% endtag %}
+  {% endcmp %}
+{% endcmp %}

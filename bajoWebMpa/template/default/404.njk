@@ -7,6 +7,6 @@
 {% endblock %}
 
 {% block body %}
-{% tag 'h1', displayHeading=1 %}404{% endtag %}
-{% tag 'h6', displayHeading=6 %}{{ 'Page not found'|t }}{% endtag %}
+{% cmp 'h1', displayHeading=1 %}404{% endcmp %}
+{% cmp 'h6', displayHeading=6 %}{{ 'Page not found'|t }}{% endcmp %}
 {% endblock %}

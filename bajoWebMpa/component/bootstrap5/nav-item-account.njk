@@ -1,0 +1,5 @@
+{% cmp 'navItemDropdown',
+    icon='account',
+    caption=_meta.user|ternary(_meta.user.firstName + ' ' + _meta.user.lastName, 'Guest'|t),
+    onParent=true,
+    options=_meta.menuUser %}{% endcmp %}

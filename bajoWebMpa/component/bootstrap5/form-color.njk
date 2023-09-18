@@ -1,0 +1,21 @@
+{% cmp 'div',
+    class=attr.wrapperClass|d('mb-3'),
+    style=attr.wrapperStyle,
+    id=attr.wrapperId %}
+   {% include 'cmp:_form-label:bootstrap5' %}
+  {% cmp 'color',
+    class=attr.class,
+    style=attr.style,
+    id=attr.id,
+    name=attr.name,
+    ariaDescribedby=attr.helpId|d(attr.id + '-help') + attr.error|ternary(' ' + attr.id + '-invalid', ''),
+    disabled=attr.disabled,
+    readonly=attr.readonly,
+    placeholder=attr.placeholder,
+    value=attr.value,
+    error=attr.error,
+    success=attr.success,
+    sizing=attr.sizing %}{% endcmp %}
+  {% include 'cmp:_form-feedback:bootstrap5' %}
+  {% include 'cmp:_form-help:bootstrap5' %}
+{% endcmp %}

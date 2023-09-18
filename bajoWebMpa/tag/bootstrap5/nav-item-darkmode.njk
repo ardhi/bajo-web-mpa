@@ -1,4 +1,0 @@
-{% set darkMode = getLocals('darkMode') %}
-{% tag 'navItem',
-    href='?dark=' + (darkMode === 'light')|ternary('true', 'false'),
-    icon=(darkMode === 'light')|ternary('darkMode', 'lightMode') %}{% endtag %}

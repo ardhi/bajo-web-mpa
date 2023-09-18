@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block body %}
-{% tag 'h1', displayHeading=1 %}500{% endtag %}
-{% tag 'h6', displayHeading=6 %}{{ 'Internal Server Error'|t }}{% endtag %}
+{% cmp 'h1', displayHeading=1 %}500{% endcmp %}
+{% cmp 'h6', displayHeading=6 %}{{ 'Internal Server Error'|t }}{% endcmp %}
 {%- if getConfig('bajo').env === 'dev' %}
-  {% tag 'alert', type='danger', margin='top3' %}
+  {% cmp 'alert', type='danger', margin='top3' %}
   {{ error.message }}
-  {% endtag %}
+  {% endcmp %}
 {% endif -%}
 {% endblock %}

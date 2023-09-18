@@ -1,0 +1,13 @@
+<{{ attr.tag|d('ul') }}
+    class="{% if attr.navbar %}navbar-{% endif %}nav{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {% if attr.options|length > 0 %}
+        {% for o in attr.options %}
+            {% cmp 'navItem', useNav=attr.tag === 'nav', active=o.active, disabled=o.disabled, caption=o.caption %}{% endcmp %}
+        {% endfor %}
+    {% else %}
+    {{- content|safe -}}
+    {% endif %}
+    </{{ attr.tag|d('ul') }}>

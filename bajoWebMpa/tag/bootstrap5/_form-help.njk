@@ -1,8 +1,0 @@
-{% if attr.help %}
-  {% tag 'text',
-    class=attr.helpClass,
-    style=attr.helpStyle,
-    id=attr.helpId|d(attr.id + '-help') %}
-    {{- attr.help -}}
-    {% endtag %}
-{% endif %}

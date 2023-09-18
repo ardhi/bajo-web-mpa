@@ -1,0 +1,10 @@
+{% if attr.label %}
+  {% cmp 'label',
+    classBase='',
+    class='form-check-label' + attr.labelClass|d(''),
+    style=attr.labelStyle,
+    id=attr.labelId,
+    label=attr.label,
+    for=attr.for|d(attr.id) %}
+    {% endcmp %}
+{% endif %}

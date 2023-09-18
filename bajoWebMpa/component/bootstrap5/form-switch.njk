@@ -1,0 +1,21 @@
+{% cmp 'div',
+    class=attr.label|ternary('form-check ', '') + attr.inline|ternary('form-check-inline ', '') + attr.reverse|ternary('form-check-reverse ', '') + attr.wrapperClass|d('mb-3'),
+    style=attr.wrapperStyle,
+    id=attr.wrapperId %}
+  {% cmp 'check',
+    class=attr.class,
+    style=attr.style,
+    ariaDescribedby=attr.helpId|d(attr.id + '-help') + attr.error|ternary(' ' + attr.id + '-invalid', ''),
+    id=attr.id,
+    name=attr.name,
+    required=attr.required,
+    disabled=attr.disabled,
+    checked=attr.checked,
+    value=attr.value,
+    error=attr.error,
+    success=attr.success,
+    role='switch' %}{% endcmp %}
+  {% include 'cmp:_form-check-label:bootstrap5' %}
+  {% include 'cmp:_form-feedback:bootstrap5' %}
+  {% include 'cmp:_form-help:bootstrap5' %}
+{% endcmp %}
