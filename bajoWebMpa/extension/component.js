@@ -29,7 +29,7 @@ class Cmp {
     let name = args.shift()
     if (!excludes.includes(name)) name = kebabCase(name)
     const file = resolveComponentPath(name, context.ctx._meta.theme, true)
-    const _meta = context.ctx._meta ?? {}
+    const { form, error, _meta } = context.ctx ?? {}
     const { theme } = _meta
     let handler = get(this.scope, `${theme.plugin}.helper.getAttrHandler.exec`)
     let themeName = theme.name
@@ -40,7 +40,7 @@ class Cmp {
     }
     if (handler) handler = handler(themeName)
     const { attr, attributes, params } = getAttr.call(this, { name, context, args }, handler)
-    const locals = { cmp: name, params, attr, attributes, content: body(), _meta }
+    const locals = { cmp: name, params, attr, attributes, content: body(), form, error, _meta }
     const fragment = fs.readFileSync(file, 'utf8').replaceAll('\r', '') // TODO: replace new line inside the brackets only
     const ret = context.env.renderString(fragment, locals)
     /*

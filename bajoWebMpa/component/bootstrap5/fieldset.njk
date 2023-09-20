@@ -1,0 +1,28 @@
+<fieldset
+    class="{{ attr.class }}"
+    style="{{ attr.style }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {% if attr.legend %}
+    <legend>{{ attr.legend }}</legend>
+    {% endif %}
+    {% if attr.options %}
+      {% if attr.layout %}
+        {% cmp 'row' %}
+          {% for o in attr.options %}
+            {% if o|isString %}{% set o = { name: o, widget: 'formInput' } %}{% endif %}
+            {% cmp 'column', columns=attr.layout[loop.index0]|d([]) %}
+              {% cmp o.widget, name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), plaintext=o.plaintext, value=form[o.name], error=_meta.flash.validation|getMessage(o.name) %}{% endcmp %}
+            {% endcmp %}
+          {% endfor %}
+        {% endcmp %}
+      {% else %}
+        {% for o in attr.options %}
+          {% if o|isString %}{% set o = { name: o, widget: 'formInput' } %}{% endif %}
+          {% cmp o.widget, name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), value=form[o.name], error=_meta.flash.validation|getMessage(o.name) %}{% endcmp %}
+        {% endfor %}
+      {% endif %}
+    {% else %}
+    {{- content|safe -}}
+    {% endif %}
+    </fieldset>

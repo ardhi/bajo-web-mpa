@@ -5,6 +5,7 @@ import subApp from '../lib/sub-app.js'
 import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
 import home from '../lib/home.js'
+import setupSession from '../lib/session/setup.js'
 
 const boot = {
   level: 10,
@@ -19,6 +20,7 @@ const boot = {
     await this.bajoWeb.instance.register(async (ctx) => {
       this.bajoWebMpa.instance = ctx
       await runHook('bajoWebMpa:afterCreateContext', ctx)
+      await setupSession.call(this, ctx)
       await ctx.register(bodyParser)
       await routeHook.call(this, 'bajoWebMpa')
       await error.call(this, ctx)

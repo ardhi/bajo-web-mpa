@@ -61,7 +61,7 @@ function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, pre
       if (attr[k] === true) {
         attributes.push(`${key}`)
       } else {
-        const quote = attr[k].includes('"') ? '\'' : '"'
+        const quote = isString(attr[k]) && attr[k].includes('"') ? '\'' : '"'
         attributes.push(`${key}=${quote}${attr[k]}${quote}`)
       }
     }

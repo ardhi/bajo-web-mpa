@@ -1,0 +1,23 @@
+{% if _meta.flash.validation or toast %}
+  {% cmp 'div', class='toast-container', position='fixedBottom0End0', padding=3 %}
+    {% if toast %}
+      {% if toast|isPlainObject %}{% set toast = [toast] %}{% endif %}
+      {% for t in toast %}
+        {% cmp 'toast', shown=true, title=t.title, content=t.content %}{% endcmp %}
+      {% endfor %}
+    {% endif %}
+    {% if _meta.flash.validation %}
+      {% set error = _meta.flash.validation[_meta.flash.validation.length - 1] %}
+      {% cmp 'toast', id='validation-toast', shown=true, title='Validation Error'|t, text='bgDanger' %}
+        {% cmp 'ul', margin=0 %}
+          {% for err in error.details %}
+            {% cmp 'li' %}
+              {% cmp 'a', href='#f-' + err.field, link='light' %}{{ ('field.' + err.field)|t }}{% endcmp %}:
+              {{ err.error }}
+            {% endcmp %}
+          {% endfor %}
+        {% endcmp %}
+      {% endcmp %}
+    {% endif %}
+  {% endcmp %}
+{% endif %}
