@@ -33,6 +33,7 @@
     {% endcmp %}
     {% include 'bajoWebMpa:/partial/footer' %}
     {% include 'bajoWebMpa:/partial/validation-toast' %}
+    {% include 'bajoWebMpa:/partial/dberr-toast' %}
     {% for s in _meta.theme.script %}
       {% cmp 'script', src=s %}{% endcmp %}
     {% endfor %}
