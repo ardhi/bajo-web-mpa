@@ -49,5 +49,7 @@
     "action": "redirect",
     "route": true
   },
+  "multipart": {
+  },
   "dependencies": ["bajo-web", "bajo-web-static"]
 }
