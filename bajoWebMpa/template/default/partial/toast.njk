@@ -1,4 +1,4 @@
-{% if _meta.flash.validation or toast %}
+{% if not _meta.flash|isEmpty %}
   {% cmp 'div', class='toast-container', position='fixedBottom0End0', padding=3 %}
     {% if toast %}
       {% if toast|isPlainObject %}{% set toast = [toast] %}{% endif %}
@@ -19,5 +19,16 @@
         {% endcmp %}
       {% endcmp %}
     {% endif %}
+    {% if _meta.flash.dberr %}
+      {% cmp 'toast', id='dberr-toast', shown=true, title='DB Error'|t, text='bgDanger' %}
+        {{ _meta.flash.dberr|dump }}
+      {% endcmp %}
+    {% endif %}
+    {% if _meta.flash.dbsuccess %}
+      {% cmp 'toast', id='dbsuccess-toast', shown=true, title='DB Success'|t, text='bgSuccess' %}
+        {{ _meta.flash.dbsuccess[0].message }}
+      {% endcmp %}
+    {% endif %}
   {% endcmp %}
+
 {% endif %}
