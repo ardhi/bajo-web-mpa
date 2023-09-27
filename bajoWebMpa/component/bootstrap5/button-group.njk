@@ -1,51 +1,66 @@
 <div
-    class="btn-group{% if attr.vertical %}-vertical{% endif %}{% if attr.sizing %} btn-group-{{ attr.sizing }}{% endif %}{{ attr.class}}"
-    style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') }}
-    role="group"
-    aria-label="{{ attr.ariaLabel }}">
-    {% if attr.options %}
+  class="btn-group{% if attr.vertical %}-vertical{% endif %}{% if attr.sizing %} btn-group-{{ attr.sizing }}{% endif %}{{ attr.class}}"
+  style="{{ attr.style }}"
+  {{ attributes|safe -}}
+  {{ params|join(' ') }}
+  role="group"
+  aria-label="{{ attr.ariaLabel }}">
+  {% if attr.options %}
     {% if attr.check %}
-    {% for item in attr.options %}
-    {% set id = item.id|d(attr.id|ternary(attr.id + '-' + loop.index, generateId())) %}
-    {% cmp 'check',
-        id=id,
-        classBase='btn-check',
-        autocomplete='off' %}{% endcmp %}
-    {% cmp 'label',
-        for=id,
-        classBase='btn',
-        class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')),
-        caption=item.caption %}{{ item.caption }}{% endcmp %}
-    {% endfor %}
+      {% for item in attr.options %}
+        {% set id = item.id|d(attr.id|ternary(attr.id + '-' + loop.index, generateId())) %}
+        {% cmp 'check',
+          id=id,
+          checked=item.active,
+          value=item.value,
+          classBase='btn-check',
+          autocomplete='off' %}{% endcmp %}
+        {% cmp 'label',
+          for=id,
+          classBase='btn',
+          class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')) %}
+            {% cmp 'icon', name=item.icon, margin=item.iconMargin %}{% endcmp %}
+            {{ item.caption }}
+        {% endcmp %}
+      {% endfor %}
     {% elif attr.radio %}
-    {% set name = attr.name|d(generateId()) %}
-    {% for item in attr.options %}
-    {% set id = item.id|d(attr.id|ternary(attr.id + '-' + loop.index, generateId())) %}
-    {% cmp 'radio',
-        id=id,
-        name=name,
-        classBase='btn-check',
-        autocomplete='off' %}{% endcmp %}
-    {% cmp 'label',
-        for=id,
-        classBase='btn',
-        class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')),
-        caption=item.caption %}{{ item.caption }}{% endcmp %}
-    {% endfor %}
+      {% set name = attr.name|d(generateId()) %}
+      {% for item in attr.options %}
+        {% set id = item.id|d(attr.id|ternary(attr.id + '-' + loop.index, generateId())) %}
+          {% cmp 'radio',
+            id=id,
+            name=name,
+            classBase='btn-check',
+            checked=item.active,
+            value=item.value,
+            autocomplete='off' %}{% endcmp %}
+          {% cmp 'label',
+            for=id,
+            classBase='btn',
+            class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')) %}
+              {% if item.href %}
+                {% cmp 'a', href=item.href, text=item.active|ternary('white', undefined) %}
+                  {% cmp 'icon', name=item.icon, margin=item.iconMargin %}{% endcmp %}
+                  {{ item.caption }}
+                {% endcmp %}
+              {% else %}
+                {% cmp 'icon', name=item.icon, margin=item.iconMargin %}{% endcmp %}
+                {{ item.caption }}
+              {% endif %}
+            {% endcmp %}
+      {% endfor %}
     {% else %}
-    {% for item in attr.options %}
-    {% cmp 'button',
-        id=item.id,
-        outline=attr.outline,
-        variant=item.variant|d(attr.variant|d('primary')),
-        caption=item.caption,
-        active=item.active,
-        tag=item.tag %}{% endcmp %}
-    {% endfor %}
+      {% for item in attr.options %}
+        {% cmp 'button',
+          id=item.id,
+          outline=attr.outline,
+          variant=item.variant|d(attr.variant|d('primary')),
+          caption=item.caption,
+          active=item.active,
+          tag=item.tag %}{% endcmp %}
+      {% endfor %}
     {% endif %}
-    {% else %}
+  {% else %}
     {{- content|safe -}}
-    {% endif %}
+  {% endif %}
 </div>

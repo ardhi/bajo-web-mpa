@@ -17,7 +17,7 @@ const boot = {
     let prefix = cfg.prefix === '' ? '' : ('/' + cfg.prefix)
     if (cfg.i18nDetectors.includes('path')) prefix = `/:lang${prefix}`
     const routeHook = await importModule(`${cfgWeb.dir}/lib/route-hook.js`)
-    const handleMultipart = await importModule(`${cfgWeb.dir}/lib/handle-multipart.js`)
+    const handleMultipart = await importModule(`${cfgWeb.dir}/lib/handle-multipart-body.js`)
     await this.bajoWeb.instance.register(async (ctx) => {
       this.bajoWebMpa.instance = ctx
       await runHook('bajoWebMpa:afterCreateContext', ctx)

@@ -25,7 +25,7 @@ function stringifyStyle (obj) {
 }
 
 function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, preProcess, postProcess } = {}) {
-  const { isSet, print } = this.scope.bajo.helper
+  const { isSet } = this.scope.bajo.helper
   const { omit, kebabCase, isEmpty, isArray, isString, get, concat, merge } = this.scope.bajoWebMpa.util
   const attr = omit(args.pop() ?? {}, ['__keywords'])
   // normalize classes
@@ -60,7 +60,7 @@ function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, pre
     if (name !== 'column') {
       if (attr[k] === true) {
         attributes.push(`${key}`)
-      } else {
+      } else if (attr[k] !== false) {
         const quote = isString(attr[k]) && attr[k].includes('"') ? '\'' : '"'
         attributes.push(`${key}=${quote}${attr[k]}${quote}`)
       }
@@ -71,7 +71,7 @@ function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, pre
   if (postProcess) postProcess.call(this, { name, attr, context, args })
   if (attr.name) {
     attr.id = attr.id ?? `f-${attr.name}`
-    attr.label = attr.label ?? print._format([context.ctx._meta.ns, 'bajoDb'], `field.${attr.name}`)
+    // attr.label = attr.label ?? print._format([context.ctx._meta.ns, 'bajoDb', 'bajoWebMpa'], `field.${attr.name}`, {}, {})
   }
   // denormalize styles
   let style = get(context, `ctx._meta.theme.component.${name}.style`, {})

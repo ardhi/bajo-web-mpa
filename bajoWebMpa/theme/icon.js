@@ -7,9 +7,11 @@ const icon = {
   modeLight: 'bi bi-sun-fill',
   home: 'bi bi-house-fill',
   account: 'bi bi-person-fill',
-  listColumn: 'bi bi-list-columns-reverse',
-  listCard: 'bi bi-card-list',
-  book: 'bi bi-book'
+  list: 'bi bi-list-task',
+  listNested: 'bi bi-list-nested',
+  book: 'bi bi-book',
+  arrowLeft: 'bi bi-arrow-left',
+  arrowRight: 'bi bi-arrow-right'
 }
 
 export default icon

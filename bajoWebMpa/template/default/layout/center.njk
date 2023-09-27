@@ -17,11 +17,11 @@
         {% endcmp %}
         {% block body %}
         {% endblock %}
-        {% cmp 'button', margin='top3', tag='a', variant='link', href='/', icon='home' %}
-          {{ 'Home'|t }}
-        {% endcmp %}
         {% cmp 'footer', margin='top5', padding='top5' %}
-        {{ '&copy; %s %s. All rights reserved'|t(2023, _meta.site.orgName) }}
+          {% cmp 'p' %}{{ '&copy; %s %s. All rights reserved'|t(2023, _meta.site.orgName) }}{% endcmp %}
+          {% cmp 'p' %}
+            {% cmp 'a', href='/' %}{{ 'Home'|t }}{% endcmp %}
+          {% endcmp %}
         {% endcmp %}
       {% endcmp %}
     {% endcmp %}

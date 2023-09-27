@@ -1,7 +1,9 @@
+{% if attr.label !== false %}
 {% cmp 'label',
     class=attr.labelClass,
     style=attr.labelStyle,
     id=attr.labelId,
     for=attr.for|d(attr.id),
-    label=attr.label %}
+    label=attr.label|d(('field.' + attr.name)|t) %}
     {% endcmp %}
+{% endif %}
