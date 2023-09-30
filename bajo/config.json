@@ -22,7 +22,10 @@
     },
     "saveUninitialized": true
   },
-  "i18nDetectors": ["qs"],
+  "i18n": {
+    "detectors": ["qs"],
+    "defaultNs": ["bajoDb", "bajoWebMpa"]
+  },
   "prettier": {
     "enabled": false,
     "options": {

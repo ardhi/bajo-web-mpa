@@ -1,0 +1,5 @@
+<img
+  class="{% if attr.fluid %}img-fluid{% endif %}{{ attr.class }}"
+  style="{{ attr.style }}"
+  {{ attributes|safe }}
+  {{ params|join(' ') }}>

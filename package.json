@@ -1,6 +1,6 @@
 {
   "name": "bajo-web-mpa",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "MPA Web Server Plugin for Bajo Framework",
   "main": "index.js",
   "scripts": {
@@ -26,12 +26,28 @@
     "url": "https://github.com/ardhi/bajo-web-mpa/issues"
   },
   "homepage": "https://github.com/ardhi/bajo-web-mpa#readme",
+  "standard": {
+    "globals": [
+      "$"
+    ]
+  },
   "dependencies": {
+    "@highlightjs/cdn-assets": "^11.8.0",
     "bootstrap-icons": "^1.11.0",
     "bootstrap4": "npm:bootstrap@^4.6.2",
     "bootstrap5": "npm:bootstrap@^5.3.1",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.8.0",
     "html-minifier-terser": "^7.2.0",
+    "imagesloaded": "^5.0.0",
     "jquery": "^3.7.0",
+    "marked": "^9.0.3",
+    "marked-custom-heading-id": "^2.0.4",
+    "marked-extended-tables": "^1.0.7",
+    "marked-highlight": "^2.0.6",
+    "marked-katex-extension": "^3.0.6",
+    "marked-mangle": "^1.1.4",
+    "marked-twemoji": "^1.0.0",
     "masonry-layout": "^4.2.2",
     "nunjucks": "^3.2.4",
     "prettier": "^3.0.2",

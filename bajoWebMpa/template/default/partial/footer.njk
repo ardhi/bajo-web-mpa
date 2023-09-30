@@ -2,7 +2,7 @@
   {% cmp 'hr' %}{% endcmp %}
   {% cmp 'container', sizing='medium', padding='y3' %}
     {% cmp 'row' %}
-      {% cmp 'column', columns=['small:6', 'medium:4'], margin='bottom3', lineHeight='large' %}
+      {% cmp 'col', columns=['small:6', 'medium:4'], margin='bottom3', lineHeight='large' %}
         {{ _meta.site.orgName }}
         {% if _meta.site.address1 %}{% cmp 'br' %}{% endcmp %}{{ _meta.site.address1 }}{% endif %}
         {% if _meta.site.address2 %}{% cmp 'br' %}{% endcmp %}{{ _meta.site.address2 }}{% endif %}
@@ -18,14 +18,14 @@
         {% if _meta.site.phone %}{% cmp 'br' %}{% endcmp %}{{ 'Phone'|t }}: {{ _meta.site.phone }}{% endif %}
         {% if _meta.site.email %}{% cmp 'br' %}{% endcmp %}{{ 'Email'|t }}: {{ _meta.site.email }}{% endif %}
       {% endcmp %}
-      {% cmp 'column', columns=['small:6', 'medium:4'], margin='bottom3' %}
+      {% cmp 'col', columns=['small:6', 'medium:4'], margin='bottom3' %}
       two
       {% endcmp %}
-      {% cmp 'column', columns=['small:6', 'medium:4'], margin='bottom3' %}
+      {% cmp 'col', columns=['small:6', 'medium:4'], margin='bottom3' %}
         {% cmp 'nav', flex='column' %}
           {% for item in _meta.menuUser %}
             {% if item !== '-' %}
-            {% cmp 'navItem', href=item.value %}{{ item.text }}{% endcmp %}
+            {% cmp 'navItem', href=item.value %}{{ item.text|t }}{% endcmp %}
             {% endif %}
           {% endfor %}
         {% endcmp %}

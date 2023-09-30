@@ -7,8 +7,11 @@ const icon = {
   modeLight: 'bi bi-sun-fill',
   home: 'bi bi-house-fill',
   account: 'bi bi-person-fill',
-  list: 'bi bi-list-task',
+  list: 'bi bi-list',
   listNested: 'bi bi-list-nested',
+  listBullet: 'bi bi-list-ul',
+  grid: 'bi bi-grid',
+  gridSmall: 'bi bi-grid-3x3-gap',
   book: 'bi bi-book',
   arrowLeft: 'bi bi-arrow-left',
   arrowRight: 'bi bi-arrow-right'

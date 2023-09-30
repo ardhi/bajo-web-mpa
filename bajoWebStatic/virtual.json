@@ -16,4 +16,10 @@
 }, {
   "prefix": "masonry",
   "root": "node_modules/masonry-layout/dist"
+}, {
+  "prefix": "highlight.js",
+  "root": "node_modules/@highlightjs/cdn-assets"
+}, {
+  "prefix": "imagesloaded",
+  "root": "node_modules/imagesloaded"
 }]

@@ -6,7 +6,16 @@
 {% endif %}
 {% endset -%}
 {% cmp 'navItemDropdown',
-    icon='account',
-    caption=user,
-    onParent=true,
-    options=_meta.menuUser %}{% endcmp %}
+  icon='account',
+  caption=user,
+  onParent=true %}
+  {% cmp 'dropdownMenu' %}
+    {% for m in _meta.menuUser %}
+      {% if m === '-' -%}
+      <li><hr class="dropdown-divider"></li>
+      {% else %}
+      <li><a class="dropdown-item" href="{{ m.value }}">{{ m.text|t }}</a></li>
+      {% endif -%}
+    {% endfor %}
+  {% endcmp %}
+{% endcmp %}

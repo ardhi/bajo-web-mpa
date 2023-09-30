@@ -39,12 +39,12 @@
             classBase='btn',
             class='btn-' + attr.outline|ternary('outline-', '') + item.variant|d(attr.variant|d('primary')) %}
               {% if item.href %}
-                {% cmp 'a', href=item.href, text=item.active|ternary('white', undefined) %}
+                {% cmp 'a', href=item.href, text=item.active|ternary('white', undefined), stretchedLink=true %}
                   {% cmp 'icon', name=item.icon, margin=item.iconMargin %}{% endcmp %}
                   {{ item.caption }}
                 {% endcmp %}
               {% else %}
-                {% cmp 'icon', name=item.icon, margin=item.iconMargin %}{% endcmp %}
+                {% cmp 'icon', name=item.icon, margin=item.iconMargin, stretchedLink=true %}{% endcmp %}
                 {{ item.caption }}
               {% endif %}
             {% endcmp %}

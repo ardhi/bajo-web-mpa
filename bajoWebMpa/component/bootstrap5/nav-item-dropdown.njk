@@ -8,5 +8,9 @@
     caption=attr.caption,
     onParent=attr.onParent,
     ariaExpanded='false' %}
+    {% if attr.options %}
     {% cmp 'dropdownMenu', class=attr.menuClass, style=attr.menuStyle, options=attr.options %}{% endcmp %}
+    {% else %}
+    {{ content|safe }}
+    {% endif %}
     {% endcmp %}
