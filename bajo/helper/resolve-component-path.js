@@ -6,17 +6,17 @@ const selfClosing = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
 
 function resolveComponentPath (name, theme, useCustom) {
   const { getConfig } = this.bajo.helper
-  let dir = getConfig(theme.plugin, { full: true }).dir
+  let dir = getConfig(theme.plugin, { full: true }).dir.pkg
   let item = `${dir}/bajoWebMpa/component/${theme.name}/${name}.njk`
   if (!fs.existsSync(item)) { // is it in theme?
     const t = this.bajoWebMpa.themes.find(i => i.name === theme.framework)
     if (t) {
-      dir = getConfig(t.plugin, { full: true }).dir
+      dir = getConfig(t.plugin, { full: true }).dir.pkg
       item = `${dir}/bajoWebMpa/component/${t.name}/${name}.njk`
     }
   }
   if (!fs.existsSync(item)) { // is it in framework?
-    dir = getConfig('bajoWebMpa', { full: true }).dir
+    dir = getConfig('bajoWebMpa', { full: true }).dir.pkg
     item = `${dir}/bajoWebMpa/component/common/${name}.njk`
   }
   if (!fs.existsSync(item)) {

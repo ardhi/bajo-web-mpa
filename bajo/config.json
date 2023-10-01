@@ -26,6 +26,7 @@
     "detectors": ["qs"],
     "defaultNs": ["bajoDb", "bajoWebMpa"]
   },
+  "emoji": true,
   "prettier": {
     "enabled": false,
     "options": {

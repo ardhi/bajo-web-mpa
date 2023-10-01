@@ -1,6 +1,6 @@
 {
   "name": "bajo-web-mpa",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "description": "MPA Web Server Plugin for Bajo Framework",
   "main": "index.js",
   "scripts": {
@@ -47,8 +47,8 @@
     "marked-highlight": "^2.0.6",
     "marked-katex-extension": "^3.0.6",
     "marked-mangle": "^1.1.4",
-    "marked-twemoji": "^1.0.0",
     "masonry-layout": "^4.2.2",
+    "node-emoji": "^2.1.0",
     "nunjucks": "^3.2.4",
     "prettier": "^3.0.2",
     "prismjs": "^1.29.0"

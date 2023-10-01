@@ -1,0 +1,7 @@
+{% cmp 'div', display='flex', alignItems='center' %}
+  {% cmp 'buttonGroup', outline=true, radio=true, options=[
+    { href: '?list=bullet&query=' + _meta.reqQuery.query|d(''), icon: 'listBullet', active: attr.list === 'bullet' },
+    { href: '?list=gridsmall&query=' + _meta.reqQuery.query|d(''), icon: 'gridSmall', active: attr.list === 'gridsmall' },
+    { href: '?list=grid&query=' + _meta.reqQuery.query|d(''), icon: 'grid', active: attr.list === 'grid'  }
+  ] %}{% endcmp %}
+{% endcmp %}

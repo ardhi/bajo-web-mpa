@@ -1,0 +1,29 @@
+{% if attr.wrapper|d(true) %}
+<nav
+  class="{{ attr.classWrapper }}"
+  style="{{ attr.styleWrapper }}"
+  aria-label="{{ attr.ariaLabel|d('Pagination') }}">
+{% endif %}
+  <ul
+    class="pagination{{ attr.class }}"
+    {{ attributes|safe -}}
+    {{ params|join(' ') -}}>
+    {% if attr.options.pages > 0 %}
+      {% if attr.options.page > 1 %}
+        {% set params = attr.options|pick(['query', 'limit'])|set('page', attr.options.page - 1) %}
+        {% cmp 'pageItem', active=o.active, disabled=o.disabled, caption=attr.options.captionPrev|d('Previous')|t, href='?' + params|qsStringify()  %}{% endcmp %}
+      {% endif %}
+      {% for i in range(1, (attr.options.pages - 1)) %}
+        {% cmp 'pageItem', active=o.active, disabled=o.disabled, caption=i %}{% endcmp %}
+      {% endfor %}
+      {% if attr.options.page < attr.options.pages %}
+        {% set params = attr.options|pick(['query', 'limit'])|set('page', attr.options.page + 1) %}
+        {% cmp 'pageItem', active=o.active, disabled=o.disabled, caption=attr.options.captionNext|d('Next')|t, href='?' + params|qsStringify() %}{% endcmp %}
+      {% endif %}
+    {% else %}
+      {{- content|safe -}}
+    {% endif %}
+  </ul>
+{% if attr.wrapper|d(true) %}
+</nav>
+{% endif %}

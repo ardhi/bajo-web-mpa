@@ -1,0 +1,6 @@
+<li
+  class="page-item{{ attr.class }}"
+  {{ attributes|safe -}}
+  {{ params|join(' ') -}}>
+  {% cmp 'a', class='page-link', href=attr.href %}{{- attr.caption|d(content|safe) -}}{% endcmp %}
+</li>
