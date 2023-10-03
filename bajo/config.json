@@ -49,6 +49,11 @@
       "removeEmptyAttributes": true
     }
   },
+  "markdown": {
+    "tableClass": "table my-3",
+    "tableHeadClass": "",
+    "tableBodyClass": "table-group-divider"
+  },
   "home": {
     "action": "redirect",
     "route": true

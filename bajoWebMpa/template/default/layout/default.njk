@@ -2,17 +2,17 @@
   {% cmp 'head' %}
     {% cmp 'meta', charset='utf-8' %}{% endcmp %}
     {% cmp 'meta', name='viewport', content='width=device-width, initial-scale=1' %}{% endcmp %}
-    {% cmp 'title'%}{{ getConfig('bajoWebBook').title|t }} - {{ _meta.site.title }}{% endcmp %}
+    {% cmp 'title'%}{{ getConfig('bajoBook').title|t }} - {{ _meta.site.title }}{% endcmp %}
     {% for c in _meta.theme.css %}
       {% cmp 'link', rel='stylesheet', href=c %}{% endcmp %}
     {% endfor %}
-    {% cmp 'link', rel='stylesheet', href=assetDir('bajoWebBook') + '/css/book.css' %}{% endcmp %}
+    {% cmp 'link', rel='stylesheet', href=assetDir('bajoBook') + '/css/book.css' %}{% endcmp %}
     {% block css %}{% endblock %}
   {% endcmp %}
   {% cmp 'body', padding=0, margin=0 %}
     {% cmp 'navbar', expand='large', bg='primary', sticky='top', dark=true, padding='y3' %}
       {% cmp 'container', sizing='medium' %}
-        {% cmp 'navbarBrand' %}{{ getConfig('bajoWebBook').title|t }}{% endcmp %}
+        {% cmp 'navbarBrand' %}{{ getConfig('bajoBook').title|t }}{% endcmp %}
         {% cmp 'navbarToggler', collapseId='main-navs' %}{% endcmp %}
         {% cmp 'navbarCollapse', id='main-navs' %}
           <!--

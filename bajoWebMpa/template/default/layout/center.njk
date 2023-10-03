@@ -6,7 +6,7 @@
     {% for c in _meta.theme.css %}
       {% cmp 'link', rel='stylesheet', href=c %}{% endcmp %}
     {% endfor %}
-    {% cmp 'link', rel='stylesheet', href=assetDir('bajoWebBook') + '/css/book.css' %}{% endcmp %}
+    {% cmp 'link', rel='stylesheet', href=assetDir('bajoBook') + '/css/book.css' %}{% endcmp %}
     {% block css %}{% endblock %}
   {% endcmp %}
   {% cmp 'body', padding=0, margin=0 %}
