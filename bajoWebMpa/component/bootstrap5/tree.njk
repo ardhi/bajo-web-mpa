@@ -5,6 +5,7 @@
     {{ params|join(' ') -}}>
       {% for o in attr.options %}
       {% cmp 'li' %}
+        {% if o.prefix %}{{ o.prefix }}{% endif %}
         {% cmp 'a', href=o.href %}{{ o.caption }}{% endcmp %}
         {% if o.children|length > 0 %}
           {% cmp 'tree', options=o.children, tag=attr.tag %}{% endcmp %}
