@@ -1,7 +1,8 @@
 function mailto (env, text) {
-  const { emailAddresses } = this.bajoWebMpa.util
-  const addr = emailAddresses.parseOneAddress(text)
-  return `<a href="mailto:${addr.address}">${addr.name}</a>`
+  const { emailAddresses, isEmpty } = this.bajoWebMpa.util
+  let { address, name } = emailAddresses.parseOneAddress(text)
+  if (isEmpty(name)) name = address
+  return `<a href="mailto:${address}">${name}</a>`
 }
 
 export default mailto
