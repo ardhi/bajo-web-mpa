@@ -1,7 +1,13 @@
+{% set types = attr.types|d(['listBullet', 'gridSmall', 'grid']) %}
 {% cmp 'div', display='flex', alignItems='center' %}
-  {% cmp 'buttonGroup', outline=true, radio=true, options=[
-    { href: '?list=bullet&query=' + _meta.reqQuery.query|d(''), icon: 'listBullet', active: attr.list === 'bullet' },
-    { href: '?list=gridsmall&query=' + _meta.reqQuery.query|d(''), icon: 'gridSmall', active: attr.list === 'gridsmall' },
-    { href: '?list=grid&query=' + _meta.reqQuery.query|d(''), icon: 'grid', active: attr.list === 'grid'  }
-  ] %}{% endcmp %}
+  {% cmp 'buttonGroup', outline=true, radio=true %}
+    {% for t in types %}
+      {% cmp 'radio', classBase='btn-check', icon='list', checked=t === attr.list %}{% endcmp %}
+      {% cmp 'label', classBase='btn', class='btn-outline-primary' %}
+        {% cmp 'a', href='?list=' + t + '&query=' + _meta.reqQuery.query|d(''), text=(attr.list === t)|ternary('white', undefined), stretchedLink=true %}
+          {% cmp 'icon', name=t %}{% endcmp %}
+        {% endcmp %}
+      {% endcmp %}
+    {% endfor %}
+  {% endcmp %}
 {% endcmp %}
