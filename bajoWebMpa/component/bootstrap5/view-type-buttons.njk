@@ -1,10 +1,11 @@
-{% set types = attr.types|d(['listBullet', 'gridSmall', 'grid']) %}
+{% set types = attr.types|d(['table', 'gridSmall', 'grid']) %}
 {% cmp 'div', display='flex', alignItems='center' %}
   {% cmp 'buttonGroup', outline=true, radio=true %}
     {% for t in types %}
-      {% cmp 'radio', classBase='btn-check', icon='list', checked=t === attr.list %}{% endcmp %}
+      {% cmp 'radio', classBase='btn-check', checked=t === attr.view %}{% endcmp %}
       {% cmp 'label', classBase='btn', class='btn-outline-primary' %}
-        {% cmp 'a', href='?list=' + t + '&query=' + _meta.reqQuery.query|d(''), text=(attr.list === t)|ternary('white', undefined), stretchedLink=true %}
+        {% set params = _meta.reqQuery|pick(['query', 'sort'])|set('view', t) %}
+        {% cmp 'a', href='?' + params|qsStringify, text=(attr.view === t)|ternary('white', undefined), stretchedLink=true %}
           {% cmp 'icon', name=t %}{% endcmp %}
         {% endcmp %}
       {% endcmp %}

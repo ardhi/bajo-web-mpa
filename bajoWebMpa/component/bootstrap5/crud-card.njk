@@ -1,0 +1,10 @@
+{% cmp 'card', shadow=true %}
+  {% cmp 'cardBody' %}
+    {% for p in attr.schema.properties %}
+      {% cmp 'div', display='flex', justifyContent='between' %}
+        {% cmp 'cardText' %}<strong>{{ ('field.' + p.name)|t }}</strong>{% endcmp %}
+        {% cmp 'cardText', text='truncate', padding='start2' %}{{ attr.record[p.name] }}{% endcmp %}
+      {% endcmp %}
+    {% endfor %}
+  {% endcmp %}
+{% endcmp %}

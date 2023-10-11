@@ -1,0 +1,13 @@
+{% if attr.responsive %}
+<div class="table-responsive">
+{% endif %}
+<table
+  class="table{{ attr.class }}"
+  style="{{ attr.style }}"
+  {{ attributes|safe -}}
+  {{ params|join(' ') -}}>
+    {{- content|safe -}}
+</table>
+{% if attr.responsive %}
+</div>
+{% endif %}
