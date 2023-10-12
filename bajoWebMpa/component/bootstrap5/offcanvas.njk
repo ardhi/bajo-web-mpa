@@ -1,0 +1,14 @@
+<div
+  class="offcanvas offcanvas-start{{ attr.class }}"
+  style="{{ attr.style }}"
+  aria-labelledby="{{ attr.titleId|d('offcanvasLabel') }}"
+  tab-index="-1"
+  {{ attributes|safe -}}
+  {{ params|join(' ') -}}>
+    {% if attr.title %}
+      {% cmp 'offcanvasHeader', title=attr.title, titleId=attr.titleId %}{% endcmp %}
+    {% endif %}
+    <div class="offcanvas-body">
+      {{- content|safe -}}
+    </div>
+  </div>
