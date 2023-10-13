@@ -2,8 +2,15 @@
   {% cmp 'cardBody' %}
     {% for p in attr.schema.properties %}
       {% cmp 'div', display='flex', justifyContent='between' %}
-        {% cmp 'cardText' %}<strong>{{ ('field.' + p.name)|t }}</strong>{% endcmp %}
-        {% cmp 'cardText', text='truncate', padding='start2' %}{{ attr.record[p.name] }}{% endcmp %}
+        {% set label = p.label|ternary('field.' + p.label, 'field.' + p.name)|t %}
+        {% cmp 'cardText' %}<strong>{{ label }}</strong>{% endcmp %}
+        {% cmp 'cardText', text='truncate', padding='start2' %}
+          {% if p.type === 'boolean' %}
+            {% cmp 'icon', name=attr.record[p.name]|ternary('boxCheck', 'boxUncheck') %}{% endcmp %}
+          {% else %}
+            {{ attr.record[p.name]|format(p.type) }}
+          {% endif %}
+        {% endcmp %}
       {% endcmp %}
     {% endfor %}
   {% endcmp %}

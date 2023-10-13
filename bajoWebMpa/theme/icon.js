@@ -17,7 +17,9 @@ const icon = {
   arrowRight: 'bi bi-arrow-right',
   table: 'bi bi-table',
   caretUp: 'bi bi-caret-up-fill',
-  caretDown: 'bi bi-caret-down-fill'
+  caretDown: 'bi bi-caret-down-fill',
+  boxCheck: 'bi bi-check2-square',
+  boxUncheck: 'bi bi-square'
 }
 
 export default icon

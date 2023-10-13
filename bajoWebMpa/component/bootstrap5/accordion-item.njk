@@ -1,29 +1,29 @@
 <div
-    class="accordion-item{{ attr.class }}"
-    style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    <h2
-        class="accordion-header">
-        <button
-            class="accordion-button{% if not attr.open %} collapsed{% endif %}"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#{{ attr.id }}"
-            aria-expanded="{{ attr.open|ternary('true', 'false') }}"
-            aria-controls="{{ attr.id }}">
-            {{ attr.caption }}
-        </button>
-    </h2>
+  class="accordion-item{{ attr.class }}"
+  style="{{ attr.style }}"
+  {{ attributes|safe -}}
+  {{ params|join(' ') -}}>
+  <h2
+    class="accordion-header">
+    <button
+      class="accordion-button{% if not attr.open %} collapsed{% endif %}"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#{{ attr.target }}"
+      aria-expanded="{{ attr.open|ternary('true', 'false') }}"
+      aria-controls="{{ attr.target }}">
+      {{ attr.caption }}
+    </button>
+  </h2>
+  <div
+    id="{{ attr.target }}"
+    class="accordion-collapse collapse{% if attr.open %} show{% endif %}"
+    {% if not attr.stayOpen %}
+    data-bs-parent="#{{ attr.parentId }}"
+    {% endif %}>
     <div
-        id="{{ attr.id }}"
-        class="accordion-collapse collapse{% if attr.open %} show{% endif %}"
-        {% if not attr.stayOpen %}
-        data-bs-parent="#{{ attr.parentId }}"
-        {% endif %}>
-        <div
-            class="accordion-body">
-            {{- attr.content|d(content|safe) -}}
-        </div>
+      class="accordion-body">
+      {{- attr.content|d(content|safe) -}}
     </div>
+  </div>
 </div>

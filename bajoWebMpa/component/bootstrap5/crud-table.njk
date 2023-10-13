@@ -5,16 +5,15 @@
     {% cmp 'tableRow' %}
       {% for p in attr.schema.properties %}
         {% cmp 'tableHeader', text='nowrap' %}
+          {% set label = p.label|ternary('field.' + p.label, 'field.' + p.name)|t %}
           {% if p.index or p.name === 'id' %}
             {% set params = _meta.reqQuery|pick(['query'])|set('sort', p.name + ':' + (sorts[0] === p.name)|ternary(sortDir|d(''), '1')) %}
-            {% cmp 'a', href='?' + params|qsStringify %}
-              {{- ('field.' + p.name)|t -}}
-            {% endcmp %}
+            {% cmp 'a', href='?' + params|qsStringify %}{{ label }}{% endcmp %}
             {% if p.name === sorts[0] %}
               {% cmp 'icon', name=(sortDir === '-1')|ternary('caretUp', 'caretDown') %}{% endcmp %}
             {% endif %}
           {% else %}
-            {{ ('field.' + p.name)|t }}
+            {{ label }}
           {% endif %}
         {% endcmp %}
       {% endfor %}
@@ -24,7 +23,13 @@
     {% for r in attr.records %}
       {% cmp 'tableRow' %}
         {% for p in attr.schema.properties %}
-          {% cmp 'tableDataCell' %}{{ r[p.name] }}{% endcmp %}
+          {% if p.type === 'boolean' %}
+            {% cmp 'tableDataCell', text='center' %}
+              {% cmp 'icon', name=r[p.name]|ternary('boxCheck', 'boxUncheck') %}{% endcmp %}
+            {% endcmp %}
+          {% else %}
+            {% cmp 'tableDataCell', text=['integer', 'smallint', 'float', 'double'].includes(p.type)|ternary('end', undefined) %}{{ r[p.name]|format(p.type) }}{% endcmp %}
+          {% endif %}
         {% endfor %}
       {% endcmp %}
     {% endfor %}

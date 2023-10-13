@@ -8,7 +8,11 @@
     {% if attr.title %}
       {% cmp 'offcanvasHeader', title=attr.title, titleId=attr.titleId %}{% endcmp %}
     {% endif %}
-    <div class="offcanvas-body">
-      {{- content|safe -}}
-    </div>
+    {% if not attr.noBodyWrap %}
+      <div class="offcanvas-body">
+    {% endif %}
+    {{- content|safe -}}
+    {% if not attr.noBodyWrap %}
+      </div>
+    {% endif %}
   </div>
