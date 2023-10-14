@@ -1,7 +1,7 @@
 <div
-    class="row{% if not attr.columns|isEmpty %} row-cols{{ attr.columns|join(' row-cols') }}{% else %}{% if attr.width or attr.sizing %} row-cols{% if attr.sizing %}-{{ attr.sizing }}{% endif %}{% if attr.width %}-{{ attr.width }}{% endif %}{% endif %}{% endif %}{{ attr.class }}"
+    class="row{% if not attr.columns|is('empty') %} row-cols{{ attr.columns|join(' row-cols') }}{% else %}{% if attr.width or attr.sizing %} row-cols{% if attr.sizing %}-{{ attr.sizing }}{% endif %}{% if attr.width %}-{{ attr.width }}{% endif %}{% endif %}{% endif %}{{ attr.class }}"
     style="{{ attr.style }}"
-    {% if attr.masonry %}data-masonry='{{ attr.masonry|isString|ternary(attr.masonry, '{"percentPosition": true }')|safe }}'{% endif %}
+    {% if attr.masonry %}data-masonry='{{ attr.masonry|is('string')|ternary(attr.masonry, '{"percentPosition": true }')|safe }}'{% endif %}
     {{ attributes|safe -}}
     {{ params|join(' ') -}}>
     {{- attr.content|d(content|safe) -}}

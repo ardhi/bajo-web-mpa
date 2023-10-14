@@ -18,10 +18,10 @@
     plaintext=attr.plaintext %}{% endcmp %}
 {% endset %}
 {% cmp 'div',
-    class=(attr.labelFloating and not ['file']|includes(attr.type))|ternary('form-floating ', '') + attr.wrapperClass|d('mb-3'),
+    class=(attr.labelFloating and not ['file']|array('includes', attr.type))|ternary('form-floating ', '') + attr.wrapperClass|d('mb-3'),
     style=attr.wrapperStyle,
     id=attr.wrapperId %}
-  {% if (attr.labelFloating and not ['file']|includes(attr.type)) %}
+  {% if (attr.labelFloating and not ['file']|array('includes', attr.type)) %}
     {{ input }}
     {% include 'cmp:_form-label:bootstrap5' %}
   {% else %}

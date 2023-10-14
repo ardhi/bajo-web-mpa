@@ -5,5 +5,5 @@
     {{ attributes|safe -}}
     {{ params|join(' ') -}}>
     {{- attr.content|d(content|safe) -}}
-    {% if attr.topRight|isString %}<span class="visually-hidden">{{ attr.topRight }}</span>{% endif %}
+    {% if attr.topRight|is('string') %}<span class="visually-hidden">{{ attr.topRight }}</span>{% endif %}
     </span>

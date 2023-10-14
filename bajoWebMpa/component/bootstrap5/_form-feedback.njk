@@ -1,4 +1,4 @@
-{% if attr.error|isString or attr.success|isString %}
+{% if attr.error|is('string') or attr.success|is('string') %}
   {% cmp 'div',
     class=attr.error|ternary('invalid-feedback', 'valid-feedback'),
     id=attr.id + '-invalid' %}

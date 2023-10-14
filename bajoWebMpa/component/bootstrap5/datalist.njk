@@ -3,15 +3,15 @@
     style="{{ attr.style }}"
     {{ attributes|safe -}}
     {{ params|join(' ') -}}>
-    {%- if attr.options|isPlainObject -%}
+    {%- if attr.options|is('plainObject') -%}
     {%- for value, key in attr.options -%}
     <option value="{{ value }}">{{ key }}</option>
     {%- endfor -%}
     {%- else -%}
     {%- for opt in attr.options -%}
-    {%- if opt|isString -%}
+    {%- if opt|is('string') -%}
     <option value="{{ opt }}"></option>
-    {%- elif opt|isArray -%}
+    {%- elif opt|is('array') -%}
     <option value="{{ opt[0] }}">{{ opt[1] }}</option>
     {%- else -%}
     <option value="{{ opt.value }}">{{ opt.text }}</option>

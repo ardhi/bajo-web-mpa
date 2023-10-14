@@ -1,7 +1,7 @@
-{% if not _meta.flash|isEmpty %}
+{% if not _meta.flash|is('empty') %}
   {% cmp 'div', class='toast-container', position='fixedBottom0End0', padding=3 %}
     {% if toast %}
-      {% if toast|isPlainObject %}{% set toast = [toast] %}{% endif %}
+      {% if toast|is('plainObject') %}{% set toast = [toast] %}{% endif %}
       {% for t in toast %}
         {% cmp 'toast', shown=true, title=t.title, content=t.content %}{% endcmp %}
       {% endfor %}
