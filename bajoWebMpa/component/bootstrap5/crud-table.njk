@@ -1,4 +1,4 @@
-{% set sorts = _meta.reqQuery.sort|d('')|split(':') %}
+{% set sorts = _meta.query.sort|d('')|split(':') %}
 {% set sortDir = (sorts[1] === '1')|ternary('-1', '1')%}
 {% set indexes = [] %}
 {% for item in attr.schema.indexes %}
@@ -6,14 +6,17 @@
     {{ indexes|array('push', i)|void }}
   {% endfor %}
 {% endfor %}
-{% cmp 'table', responsive=true %}
+{% cmp 'table', responsive=true, table='hover', id=attr.id  %}
   {% cmp 'tableHead' %}
     {% cmp 'tableRow' %}
+      {% cmp 'tableHeader' %}
+        {% cmp 'check', class='check-toggler' %}{% endcmp %}
+      {% endcmp %}
       {% for p in attr.schema.properties %}
         {% cmp 'tableHeader', text='nowrap' %}
           {% set label = p.label|ternary('field.' + p.label, 'field.' + p.name)|t %}
           {% if p.index or p.name === 'id' or indexes|array('includes', p.name) %}
-            {% set params = _meta.reqQuery|pick(['query'])|set('sort', p.name + ':' + (sorts[0] === p.name)|ternary(sortDir|d(''), '1')) %}
+            {% set params = _meta.query|pick(['query'])|set('sort', p.name + ':' + (sorts[0] === p.name)|ternary(sortDir|d(''), '1')) %}
             {% cmp 'a', href='?' + params|qsStringify %}{{ label }}{% endcmp %}
             {% if p.name === sorts[0] %}
               {% cmp 'icon', name=(sortDir === '-1')|ternary('caretUp', 'caretDown') %}{% endcmp %}
@@ -28,6 +31,9 @@
   {% cmp 'tableBody', table='groupDivider' %}
     {% for r in attr.records %}
       {% cmp 'tableRow' %}
+        {% cmp 'tableDataCell' %}
+          {% cmp 'check', value=r.id %}{% endcmp %}
+        {% endcmp %}
         {% for p in attr.schema.properties %}
           {% if p.type === 'boolean' %}
             {% cmp 'tableDataCell', text='center' %}

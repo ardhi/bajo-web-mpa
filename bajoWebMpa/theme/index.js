@@ -9,6 +9,7 @@ async function themes () {
     script: [
       `${virtualDir('bajoWebMpa')}/jquery/jquery.min.js`,
       `${virtualDir('bajoWebMpa')}/bs5/js/bootstrap.bundle.min.js`,
+      `${virtualDir('bajoWebMpa')}/bootbox/bootbox.min.js`,
       `${virtualDir('bajoWebMpa')}/masonry/masonry.pkgd.min.js`,
       `${virtualDir('bajoWebMpa')}/imagesloaded/imagesloaded.pkgd.min.js`,
       `${assetDir('bajoWebMpa')}/js/common.js`

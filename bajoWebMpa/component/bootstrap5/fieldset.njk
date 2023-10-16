@@ -1,3 +1,11 @@
+{% set layout = [] %}
+{% for o in attr.options %}
+  {% if o|is('plainObject') %}
+    {{ layout|array('push', o.col|d(':12'))|void }}
+  {% else %}
+    {{ layout|array('push', ':12')|void }}
+  {% endif %}
+{% endfor %}
 <fieldset
     class="{{ attr.class }}"
     style="{{ attr.style }}"
@@ -7,21 +15,14 @@
     <legend>{{ attr.legend }}</legend>
     {% endif %}
     {% if attr.options %}
-      {% if attr.layout %}
-        {% cmp 'row' %}
-          {% for o in attr.options %}
-            {% if o|is('string') %}{% set o = { name: o, widget: 'formInput' } %}{% endif %}
-            {% cmp 'col', columns=attr.layout[loop.index0]|d([]) %}
-              {% cmp o.widget, name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), plaintext=o.plaintext, value=form[o.name], error=_meta.flash.validation|getMessage(o.name) %}{% endcmp %}
-            {% endcmp %}
-          {% endfor %}
-        {% endcmp %}
-      {% else %}
+      {% cmp 'row' %}
         {% for o in attr.options %}
           {% if o|is('string') %}{% set o = { name: o, widget: 'formInput' } %}{% endif %}
-          {% cmp o.widget, name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), value=form[o.name], error=_meta.flash.validation|getMessage(o.name) %}{% endcmp %}
+          {% cmp 'col', columns=layout[loop.index0]|d([]) %}
+            {% cmp o.widget|d('formInput'), name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), plaintext=o.plaintext, value=form[o.name]|format(o.type), error=_meta.flash.validation|getMessage(o.name) %}{% endcmp %}
+          {% endcmp %}
         {% endfor %}
-      {% endif %}
+      {% endcmp %}
     {% else %}
     {{- content|safe -}}
     {% endif %}

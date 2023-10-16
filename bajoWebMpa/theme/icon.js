@@ -13,13 +13,17 @@ const icon = {
   grid: 'bi bi-grid',
   gridSmall: 'bi bi-grid-3x3-gap',
   book: 'bi bi-book',
-  arrowLeft: 'bi bi-arrow-left',
-  arrowRight: 'bi bi-arrow-right',
+  arrowStart: 'bi bi-arrow-left',
+  arrowEnd: 'bi bi-arrow-right',
   table: 'bi bi-table',
   caretUp: 'bi bi-caret-up-fill',
   caretDown: 'bi bi-caret-down-fill',
   boxCheck: 'bi bi-check2-square',
-  boxUncheck: 'bi bi-square'
+  boxUncheck: 'bi bi-square',
+  crudDelete: 'bi bi-trash',
+  crudDetail: 'bi bi-view-list',
+  crudEdit: 'bi bi-pen',
+  crudAdd: 'bi bi-plus-circle'
 }
 
 export default icon

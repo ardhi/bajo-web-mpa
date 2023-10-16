@@ -15,7 +15,7 @@
   {% if attr.active %}aria-current="page"{% endif %}
   {{ attributes|safe -}}
   {{ params|join(' ') -}}>
-  {% if attr.icon %}{% cmp 'icon', name=attr.icon, margin='end2' %}{% endcmp %}{% endif %}
+  {% if attr.icon %}{% cmp 'icon', name=attr.icon, margin=attr.caption|ternary('end2', undefined) %}{% endcmp %}{% endif %}
   {%- if attr.tag !== 'input' -%}
   {{- attr.caption|d(content|safe) -}}
   </{{ attr.tag|d('button') }}>

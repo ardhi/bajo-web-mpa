@@ -1,0 +1,9 @@
+{% set id = attr.id + '-buttons' %}
+{% cmp 'div', display='flex', alignItems='center' %}
+  {% cmp 'buttonGroup', margin='bottom2' %}
+    {% cmp 'button', id=id + '-add', tag='a', icon='crudAdd', variant='primary', dataHref=routePath(attr.route + '/add', { params: _meta.params }) %}{% endcmp %}
+    {% cmp 'button', id=id + '-detail', tag='a', icon='crudDetail', variant='primary', dataHref=routePath(attr.route + '/detail/', { params: _meta.params }), disabled=true %}{% endcmp %}
+    {% cmp 'button', id=id + '-edit', tag='a', icon='crudEdit', variant='primary', dataHref=routePath(attr.route + '/edit/', { params: _meta.params }), disabled=true %}{% endcmp %}
+    {% cmp 'button', id=id + '-delete', tag='a', icon='crudDelete', variant='primary', dataHref=routePath(attr.route + '/delete/', { params: _meta.params }), disabled=true %}{% endcmp %}
+  {% endcmp %}
+{% endcmp %}

@@ -22,4 +22,7 @@
 }, {
   "prefix": "imagesloaded",
   "root": "node_modules/imagesloaded"
+}, {
+  "prefix": "bootbox",
+  "root": "node_modules/bootbox/dist"
 }]
