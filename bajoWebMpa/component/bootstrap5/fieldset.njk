@@ -19,7 +19,8 @@
         {% for o in attr.options %}
           {% if o|is('string') %}{% set o = { name: o, widget: 'formInput' } %}{% endif %}
           {% cmp 'col', columns=layout[loop.index0]|d([]) %}
-            {% cmp o.widget|d('formInput'), name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), plaintext=o.plaintext, value=form[o.name]|format(o.type), error=_meta.flash.validation|getMessage(o.name) %}{% endcmp %}
+            {% set value = (o.widget === 'formPlaintext')|ternary(form[o.name]|format(o.type), form[o.name]) %}
+            {% cmp o.widget|d('formInput'), name=o.name, labelFloating=o.labelFloating|d(attr.labelFloating), plaintext=o.plaintext, value=value, error=_meta.flash.validation|getMessage(o.name), placeholder=o.placeholder %}{% endcmp %}
           {% endcmp %}
         {% endfor %}
       {% endcmp %}

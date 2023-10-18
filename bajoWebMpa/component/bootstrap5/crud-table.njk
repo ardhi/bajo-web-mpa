@@ -1,19 +1,20 @@
 {% set sorts = _meta.query.sort|d('')|split(':') %}
 {% set sortDir = (sorts[1] === '1')|ternary('-1', '1')%}
 {% set indexes = [] %}
+{% set centers = ['integer', 'smallint', 'float', 'double'] %}
 {% for item in attr.schema.indexes %}
   {% for i in item.fields %}
     {{ indexes|array('push', i)|void }}
   {% endfor %}
 {% endfor %}
-{% cmp 'table', responsive=true, table='hover', id=attr.id  %}
+{% cmp 'table', responsive=true, table='hover', id=attr.id %}
   {% cmp 'tableHead' %}
     {% cmp 'tableRow' %}
       {% cmp 'tableHeader' %}
         {% cmp 'check', class='check-toggler' %}{% endcmp %}
       {% endcmp %}
       {% for p in attr.schema.properties %}
-        {% cmp 'tableHeader', text='nowrap' %}
+        {% cmp 'tableHeader', text='nowrap', text=centers|array('includes', p.type)|ternary('end', undefined) %}
           {% set label = p.label|ternary('field.' + p.label, 'field.' + p.name)|t %}
           {% if p.index or p.name === 'id' or indexes|array('includes', p.name) %}
             {% set params = _meta.query|pick(['query'])|set('sort', p.name + ':' + (sorts[0] === p.name)|ternary(sortDir|d(''), '1')) %}
@@ -40,7 +41,7 @@
               {% cmp 'icon', name=r[p.name]|ternary('boxCheck', 'boxUncheck') %}{% endcmp %}
             {% endcmp %}
           {% else %}
-            {% cmp 'tableDataCell', text=['integer', 'smallint', 'float', 'double'].includes(p.type)|ternary('end', undefined) %}{{ r[p.name]|format(p.type) }}{% endcmp %}
+            {% cmp 'tableDataCell', text=centers|array('includes', p.type)|ternary('end', undefined) %}{{ r[p.name]|format(p.type) }}{% endcmp %}
           {% endif %}
         {% endfor %}
       {% endcmp %}

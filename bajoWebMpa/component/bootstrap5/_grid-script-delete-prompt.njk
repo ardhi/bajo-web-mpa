@@ -1,0 +1,18 @@
+function deleteRecord (ids) {
+  if (ids.length === 0) return
+  bootbox.confirm({
+    message: "{{ 'You\'re about to delete one or more records. Are you sure?'|t }}",
+    callback: function (result) {
+      if (!result) return
+      $('<form>', {
+        action: '{{ routePath(baseRoute|d(attr.baseRoute), { params: _meta.params }) }}/delete',
+        method: 'POST',
+        target: '_top'
+      }).append($('<input>', {
+        name: 'ids',
+        value: ids.join(','),
+        type: 'hidden'
+      })).appendTo('body').submit()
+    }
+  })
+}

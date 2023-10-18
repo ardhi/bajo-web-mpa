@@ -1,4 +1,15 @@
 {% cmp 'card', shadow=true %}
+  {% cmp 'cardHeader' %}
+    {% cmp 'div', display='flex', justifyContent='between' %}
+      {% cmp 'label', display='flex', width=100 %}
+        {% cmp 'check', value=attr.record.id %}{% endcmp %}
+      {% endcmp %}
+      {% cmp 'buttonGroup', sizing='small' %}
+        {% cmp 'button', tag='a', icon='crudDetail', href=routePath(attr.route + '/detail/' + attr.record.id, _meta) %}{% endcmp %}
+        {% cmp 'button', tag='a', icon='crudEdit', href=routePath(attr.route + '/edit/' + attr.record.id, _meta) %}{% endcmp %}
+      {% endcmp %}
+    {% endcmp %}
+  {% endcmp %}
   {% cmp 'cardBody' %}
     {% for p in attr.schema.properties %}
       {% cmp 'div', display='flex', justifyContent='between' %}

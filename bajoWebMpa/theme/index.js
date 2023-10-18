@@ -12,6 +12,7 @@ async function themes () {
       `${virtualDir('bajoWebMpa')}/bootbox/bootbox.min.js`,
       `${virtualDir('bajoWebMpa')}/masonry/masonry.pkgd.min.js`,
       `${virtualDir('bajoWebMpa')}/imagesloaded/imagesloaded.pkgd.min.js`,
+      `${virtualDir('bajoWebMpa')}/tempus-dominus/js/tempus-dominus.min.js`,
       `${assetDir('bajoWebMpa')}/js/common.js`
     ],
     css: [

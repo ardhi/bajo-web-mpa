@@ -2,7 +2,7 @@
   {% cmp 'form', display='flex', role='search' %}
     {% cmp 'input', name='query', margin='end2', type='search', placeholder='Search'|t, ariaLabel='Search', value=_meta.query.query %}{% endcmp %}
   {% endcmp %}
-  {% cmp 'crudButtons', route=attr.baseRoute, id=attr.baseId %}{% endcmp %}
+  {% cmp 'crudButtons', route=attr.baseRoute, id=attr.baseId, view=attr.view %}{% endcmp %}
   {% cmp 'viewTypeButtons', view=attr.view, types=['table', 'gridSmall', 'grid'] %}{% endcmp %}
 {% endcmp %}
 
@@ -11,10 +11,11 @@
   const btnDetail = $('#{{ attr.baseId }}-buttons-detail')
   const btnEdit = $('#{{ attr.baseId }}-buttons-edit')
   const btnDelete = $('#{{ attr.baseId }}-buttons-delete')
-  const toggler = $('#{{ attr.baseId }} .check-toggler')
+  const toggler = $('.check-toggler')
+
   function updateUi () {
-    const all = $('#{{ attr.baseId }} tbody tr input[type=checkbox]')
-    const checked = $('#{{ attr.baseId }} tbody tr input[type=checkbox]:checked')
+    const all = $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler")')
+    const checked = $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler"):checked')
     if (checked.length === 0) {
       toggler.prop('checked', false)
       btnDetail.addClass('disabled').removeAttr('href')
@@ -36,19 +37,8 @@
       btnDelete.removeClass('disabled')
     }
   }
-  btnDelete.on('click', function () {
-    const ids = []
-    $('#{{ attr.baseId }} tbody tr input[type=checkbox]:checked').each(function () {
-      ids.push($(this).val())
-    })
-    if (ids.length === 0) return
-    bootbox.confirm({
-      message: "{{ 'You\'re about to delete one or more records. Are you sure?'|t }}",
-      callback: function (result) {
-        console.log(result)
-      }
-    })
-  })
+
+  {% include 'cmp:_grid-script-delete-prompt:bootstrap5' %}
 
   $('#{{ attr.baseId }} tbody tr').on('click', function () {
     const el = $(this).find('input[type=checkbox]')
@@ -60,15 +50,22 @@
     const rowId = $(this).find('input[type=checkbox]').val()
     location.href='{{ routePath(attr.baseRoute + '/detail/', { params: _meta.params }) }}' + rowId
   })
-  $('#{{ attr.baseId }} .check-toggler').on('change', function () {
-    $('#{{ attr.baseId }} tbody tr input[type=checkbox]').prop('checked', $(this).is(':checked'))
+  toggler.on('change', function () {
+    $('#{{ attr.baseId }} input[type=checkbox]').prop('checked', $(this).is(':checked'))
     updateUi()
   })
   $('#{{ attr.baseId }} tbody tr input[type=checkbox]').on('click', function (evt) {
     evt.stopPropagation()
   })
-  $('#{{ attr.baseId }} tbody tr input[type=checkbox]').on('change', function () {
+  $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler")').on('change', function () {
     updateUi()
+  })
+  btnDelete.on('click', function () {
+    const ids = []
+    $('#{{ attr.baseId }} input[type=checkbox]:checked:not(".check-toggler")').each(function () {
+      ids.push($(this).val())
+    })
+    deleteRecord(ids)
   })
 </script>
 {% endscript %}

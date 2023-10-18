@@ -25,4 +25,7 @@
 }, {
   "prefix": "bootbox",
   "root": "node_modules/bootbox/dist"
+}, {
+  "prefix": "tempus-dominus",
+  "root": "node_modules/@eonasdan/tempus-dominus/dist"
 }]

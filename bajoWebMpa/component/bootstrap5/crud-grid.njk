@@ -1,0 +1,13 @@
+  {% cmp 'row', class='masonry', id=attr.id %}
+    {% for r in attr.records %}
+      {% if view === 'gridSmall' %}
+        {% cmp 'col', columns=['small:4', 'large:3'], margin='bottom4' %}
+          {% cmp 'crudGridCard', record=r, schema=attr.schema, route=attr.route %}{% endcmp %}
+        {% endcmp %}
+      {% else %}
+        {% cmp 'col', columns=['small:6', 'large:4'], margin='bottom4' %}
+          {% cmp 'crudGridCard', record=r, schema=attr.schema, route=attr.route %}{% endcmp %}
+        {% endcmp %}
+      {% endif %}
+    {% endfor %}
+  {% endcmp %}

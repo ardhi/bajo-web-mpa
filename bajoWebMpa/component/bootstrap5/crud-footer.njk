@@ -1,0 +1,6 @@
+{% cmp 'div', display='flex', justifyContent='between', alignItems='center', margin='top3' %}
+  {% cmp 'div', padding='bottom3' %}
+    {{ 'Total records: %d'|t(attr.options.count) }}
+  {% endcmp %}
+  {% cmp 'pagination', options=attr.options, display='flex', justifyContent='center' %}{% endcmp %}
+{% endcmp %}
