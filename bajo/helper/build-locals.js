@@ -4,9 +4,9 @@ async function buildLocals (name, params = {}, req, reply) {
   const cfg = getConfig('bajoWebMpa')
   const themes = this.bajoWebMpa.themes
   const theme = find(themes, { name: req.theme }) ?? {}
-  const { site, user, lang, i18n, dark } = req
+  const { site, user, lang, i18n, dark, menu } = req
   const ns = concat([name.split(':')[0]], cfg.i18n.defaultNs)
-  const _meta = { theme, site, user, lang, i18n, tpl: name, darkMode: dark, ns }
+  const _meta = { theme, site, user, lang, i18n, tpl: name, darkMode: dark, ns, menu }
   merge(_meta, pick(req, ['url', 'params', 'query']))
   _meta.route = get(req, 'routeOptions.url')
   _meta.flash = reply.flash()

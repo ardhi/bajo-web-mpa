@@ -10,7 +10,7 @@
     readonly=true,
     placeholder=attr.placeholder,
     sizing=attr.sizing,
-    value=attr.value %}{% endcmp %}
+    value=attr.value + '' %}{% endcmp %}
 {% endset %}
 {% cmp 'div',
     class=(attr.labelFloating and not ['file']|array('includes', attr.type))|ternary('form-floating ', '') + attr.wrapperClass|d('mb-3'),

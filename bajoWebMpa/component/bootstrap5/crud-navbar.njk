@@ -2,15 +2,15 @@
   {% cmp 'form', display='flex', role='search' %}
     {% cmp 'input', name='query', margin='end2', type='search', placeholder='Search'|t, ariaLabel='Search', value=_meta.query.query %}{% endcmp %}
   {% endcmp %}
-  {% cmp 'crudButtons', route=attr.baseRoute, id=attr.baseId, view=attr.view %}{% endcmp %}
+  {% cmp 'crudButtons', route=attr.baseRoute, schema=attr.schema, id=attr.baseId, view=attr.view %}{% endcmp %}
   {% cmp 'viewTypeButtons', view=attr.view, types=['table', 'gridSmall', 'grid'] %}{% endcmp %}
 {% endcmp %}
 
 {% script %}
 <script>
   const btnDetail = $('#{{ attr.baseId }}-buttons-detail')
-  const btnEdit = $('#{{ attr.baseId }}-buttons-edit')
-  const btnDelete = $('#{{ attr.baseId }}-buttons-delete')
+  const btnEdit = {% if attr.schema.disabled|array('includes', 'update') %}null{% else %}$('#{{ attr.baseId }}-buttons-edit'){% endif %}
+  const btnDelete = {% if attr.schema.disabled|array('includes', 'remove') %}null{% else %}$('#{{ attr.baseId }}-buttons-delete'){% endif %}
   const toggler = $('.check-toggler')
 
   function updateUi () {
@@ -19,22 +19,23 @@
     if (checked.length === 0) {
       toggler.prop('checked', false)
       btnDetail.addClass('disabled').removeAttr('href')
-      btnEdit.addClass('disabled').removeAttr('href')
-      btnDelete.addClass('disabled')
+      if (btnEdit) btnEdit.addClass('disabled').removeAttr('href')
+      if (btnDelete) btnDelete.addClass('disabled')
     } else if (checked.length === 1) {
+      if (all.length === 1) toggler.prop('checked', true)
       const rowId = checked.val()
-      btnDetail.removeClass('disabled').attr('href', btnDetail.data('href') + rowId)
-      btnEdit.removeClass('disabled').attr('href', btnEdit.data('href') + rowId)
-      btnDelete.removeClass('disabled')
+      btnDetail.removeClass('disabled').attr('href', btnDetail.data('href') + '?id=' + rowId)
+      if (btnEdit) btnEdit.removeClass('disabled').attr('href', btnEdit.data('href') + '?id=' + rowId)
+      if (btnDelete) btnDelete.removeClass('disabled')
     } else if (checked.length === all.length) {
       toggler.prop('checked', true)
       btnDetail.addClass('disabled').removeAttr('href')
-      btnEdit.addClass('disabled').removeAttr('href')
-      btnDelete.removeClass('disabled')
+      if (btnEdit) btnEdit.addClass('disabled').removeAttr('href')
+      if (btnDelete) btnDelete.removeClass('disabled')
     } else {
       btnDetail.addClass('disabled').removeAttr('href')
-      btnEdit.addClass('disabled').removeAttr('href')
-      btnDelete.removeClass('disabled')
+      if (btnEdit) btnEdit.addClass('disabled').removeAttr('href')
+      if (btnDelete) btnDelete.removeClass('disabled')
     }
   }
 
@@ -48,7 +49,7 @@
   })
   $('#{{ attr.baseId }} tbody tr').on('dblclick', function () {
     const rowId = $(this).find('input[type=checkbox]').val()
-    location.href='{{ routePath(attr.baseRoute + '/detail/', { params: _meta.params }) }}' + rowId
+    location.href='{{ routePath(attr.baseRoute + '/detail', { params: _meta.params }) }}' + '?id=' + rowId
   })
   toggler.on('change', function () {
     $('#{{ attr.baseId }} input[type=checkbox]').prop('checked', $(this).is(':checked'))
@@ -60,12 +61,14 @@
   $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler")').on('change', function () {
     updateUi()
   })
-  btnDelete.on('click', function () {
-    const ids = []
-    $('#{{ attr.baseId }} input[type=checkbox]:checked:not(".check-toggler")').each(function () {
-      ids.push($(this).val())
+  if (btnDelete) {
+    btnDelete.on('click', function () {
+      const ids = []
+      $('#{{ attr.baseId }} input[type=checkbox]:checked:not(".check-toggler")').each(function () {
+        ids.push($(this).val())
+      })
+      deleteRecord(ids)
     })
-    deleteRecord(ids)
-  })
+  }
 </script>
 {% endscript %}

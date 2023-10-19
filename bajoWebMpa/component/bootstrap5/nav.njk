@@ -1,5 +1,5 @@
 <{{ attr.tag|d('ul') }}
-    class="{% if attr.navbar %}navbar-{% endif %}nav{{ attr.class }}"
+    class="{% if attr.navbar %}navbar-{% endif %}nav{% if attr.type %} nav-{{ attr.type }}{% endif %}{{ attr.class }}"
     style="{{ attr.style }}"
     {{ attributes|safe -}}
     {{ params|join(' ') -}}>

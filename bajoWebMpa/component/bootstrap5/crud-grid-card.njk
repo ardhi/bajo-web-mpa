@@ -5,8 +5,10 @@
         {% cmp 'check', value=attr.record.id %}{% endcmp %}
       {% endcmp %}
       {% cmp 'buttonGroup', sizing='small' %}
-        {% cmp 'button', tag='a', icon='crudDetail', href=routePath(attr.route + '/detail/' + attr.record.id, _meta) %}{% endcmp %}
-        {% cmp 'button', tag='a', icon='crudEdit', href=routePath(attr.route + '/edit/' + attr.record.id, _meta) %}{% endcmp %}
+        {% cmp 'button', tag='a', icon='crudDetail', href=routePath(attr.route + '/detail', { params: _meta.params }) + '?id=' + attr.record.id %}{% endcmp %}
+        {% if not attr.schema.disabled|array('includes', 'update') %}
+          {% cmp 'button', tag='a', icon='crudEdit', href=routePath(attr.route + '/edit', { params: _meta.params }) + '?id=' + attr.record.id %}{% endcmp %}
+        {% endif %}
       {% endcmp %}
     {% endcmp %}
   {% endcmp %}
