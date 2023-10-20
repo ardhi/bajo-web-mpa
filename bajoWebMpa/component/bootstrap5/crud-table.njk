@@ -14,7 +14,7 @@
         {% cmp 'check', class='check-toggler' %}{% endcmp %}
       {% endcmp %}
       {% for p in attr.schema.properties %}
-        {% cmp 'tableHeader', text='nowrap', text=centers|array('includes', p.type)|ternary('end', undefined) %}
+        {% cmp 'tableHeader', text=centers|array('includes', p.type)|ternary('end', '') + ',nowrap'  %}
           {% set label = p.label|ternary('field.' + p.label, 'field.' + p.name)|t %}
           {% if p.index or p.name === 'id' or indexes|array('includes', p.name) %}
             {% set params = _meta.query|pick(['query'])|set('sort', p.name + ':' + (sorts[0] === p.name)|ternary(sortDir|d(''), '1')) %}

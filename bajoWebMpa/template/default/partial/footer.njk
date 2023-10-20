@@ -23,7 +23,7 @@
       {% endcmp %}
       {% cmp 'col', columns=['small:6', 'medium:4'], margin='bottom3' %}
         {% cmp 'nav', flex='column' %}
-          {% for item in _meta.menuUser %}
+          {% for item in _meta.menu.user %}
             {% if item !== '-' %}
             {% cmp 'navItem', href=item.value %}{{ item.text|t }}{% endcmp %}
             {% endif %}

@@ -10,7 +10,7 @@
   caption=user,
   onParent=true %}
   {% cmp 'dropdownMenu' %}
-    {% for m in _meta.menuUser %}
+    {% for m in _meta.menu.user %}
       {% if m === '-' -%}
       <li><hr class="dropdown-divider"></li>
       {% else %}

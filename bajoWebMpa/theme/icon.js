@@ -15,6 +15,8 @@ const icon = {
   book: 'bi bi-book',
   arrowStart: 'bi bi-arrow-left',
   arrowEnd: 'bi bi-arrow-right',
+  chevronStart: 'bi bi-chevron-left',
+  chevronEnd: 'bi bi-chevron-right',
   table: 'bi bi-table',
   caretUp: 'bi bi-caret-up-fill',
   caretDown: 'bi bi-caret-down-fill',
@@ -23,7 +25,9 @@ const icon = {
   crudDelete: 'bi bi-trash',
   crudDetail: 'bi bi-view-list',
   crudEdit: 'bi bi-pen',
-  crudAdd: 'bi bi-plus-circle'
+  crudAdd: 'bi bi-plus-circle',
+  slider: 'bi bi-sliders',
+  gear: 'bi bi-gear'
 }
 
 export default icon
