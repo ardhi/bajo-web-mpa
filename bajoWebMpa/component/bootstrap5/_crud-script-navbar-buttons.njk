@@ -1,0 +1,30 @@
+  const btnDetail = $('#{{ attr.baseId }}-buttons-detail')
+  const btnEdit = {% if attr.schema.disabled|array('includes', 'update') %}null{% else %}$('#{{ attr.baseId }}-buttons-edit'){% endif %}
+  const btnDelete = {% if attr.schema.disabled|array('includes', 'remove') %}null{% else %}$('#{{ attr.baseId }}-buttons-delete'){% endif %}
+  const toggler = $('.check-toggler')
+
+  function updateUi () {
+    const all = $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler")')
+    const checked = $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler"):checked')
+    if (checked.length === 0) {
+      toggler.prop('checked', false)
+      btnDetail.addClass('disabled').removeAttr('href')
+      if (btnEdit) btnEdit.addClass('disabled').removeAttr('href')
+      if (btnDelete) btnDelete.addClass('disabled')
+    } else if (checked.length === 1) {
+      if (all.length === 1) toggler.prop('checked', true)
+      const rowId = checked.val()
+      btnDetail.removeClass('disabled').attr('href', btnDetail.data('href') + '?id=' + rowId)
+      if (btnEdit) btnEdit.removeClass('disabled').attr('href', btnEdit.data('href') + '?id=' + rowId)
+      if (btnDelete) btnDelete.removeClass('disabled')
+    } else if (checked.length === all.length) {
+      toggler.prop('checked', true)
+      btnDetail.addClass('disabled').removeAttr('href')
+      if (btnEdit) btnEdit.addClass('disabled').removeAttr('href')
+      if (btnDelete) btnDelete.removeClass('disabled')
+    } else {
+      btnDetail.addClass('disabled').removeAttr('href')
+      if (btnEdit) btnEdit.addClass('disabled').removeAttr('href')
+      if (btnDelete) btnDelete.removeClass('disabled')
+    }
+  }

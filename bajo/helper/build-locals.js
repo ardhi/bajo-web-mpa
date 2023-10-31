@@ -6,7 +6,7 @@ async function buildLocals (name, params = {}, req, reply) {
   const theme = find(themes, { name: req.theme }) ?? {}
   const { site, user, lang, i18n, dark, menu } = req
   const ns = concat([name.split(':')[0]], cfg.i18n.defaultNs)
-  const _meta = { theme, site, user, lang, i18n, tpl: name, darkMode: dark, ns, menu }
+  const _meta = { theme, site, user, lang, i18n, view: name, darkMode: dark, ns, menu }
   const plugin = get(req, 'routeOptions.config.plugin')
   let cfgp
   if (plugin) {
@@ -14,7 +14,7 @@ async function buildLocals (name, params = {}, req, reply) {
     _meta.plugin = plugin
     _meta.title = {
       plugin: cfgp.title ?? plugin,
-      page: get(req, 'routeOptions.config.name')
+      page: get(req, 'routeOptions.config.title')
     }
   }
   merge(_meta, pick(req, ['url', 'params', 'query']))

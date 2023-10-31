@@ -1,5 +1,5 @@
 <div
-    class="alert{% if attr.type %} alert-{{ attr.type }}{% endif %}{% if attr.dismissible %} alert-dismissible fade show{% endif %}{{ attr.class }}"
+    class="alert{% if attr.variant %} alert-{{ attr.variant }}{% endif %}{% if attr.dismissible %} alert-dismissible fade show{% endif %}{{ attr.class }}"
     style="{{ attr.style }}"
     {{ attributes|safe -}}
     {{ params|join(' ') -}}

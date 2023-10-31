@@ -10,9 +10,11 @@
     {% block css %}{% endblock %}
   {% endcmp %}
   {% cmp 'body', padding=0, margin=0 %}
-    {% cmp 'navbar', expand='large', bg='primary', sticky='top', dark=true, padding='y3' %}
+    {% cmp 'navbar', expand='large', bg='primary', sticky='top', dark=true, padding='y3', shadow=true %}
       {% cmp 'container', sizing='medium' %}
-        {% cmp 'navbarBrand' %}{{ getConfig('bajoBook').title|t }}{% endcmp %}
+        {% cmp 'navbarBrand' %}
+          {{ _meta.title.plugin|t }}
+        {% endcmp %}
         {% cmp 'navbarToggler', collapseId='main-navs' %}{% endcmp %}
         {% cmp 'navbarCollapse', id='main-navs' %}
           <!--
