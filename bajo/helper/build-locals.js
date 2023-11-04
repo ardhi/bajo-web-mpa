@@ -19,7 +19,7 @@ async function buildLocals (name, params = {}, req, reply) {
   }
   merge(_meta, pick(req, ['url', 'params', 'query']))
   _meta.route = get(req, 'routeOptions.url')
-  _meta.flash = reply.flash()
+  if (req.session) _meta.flash = reply.flash()
   const merged = merge({}, params, { _meta })
   await runHook('bajoWebMpa:buildLocals', merged, req)
   if (cfgp) await runHook(`bajoWebMpa.${cfgp.alias}:buildLocals`, merged, req)

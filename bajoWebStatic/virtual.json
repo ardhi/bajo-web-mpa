@@ -1,31 +1,31 @@
 [{
   "prefix": "jquery",
-  "root": "node_modules/jquery/dist"
+  "root": "jquery:/dist"
 }, {
-  "root": "node_modules/prismjs",
+  "root": "prismjs:",
   "prefix": "prismjs"
 }, {
   "prefix": "bs5",
-  "root": "node_modules/bootstrap5/dist"
+  "root": "bootstrap5:/dist"
 }, {
   "prefix": "bs4",
-  "root": "node_modules/bootstrap4/dist"
+  "root": "bootstrap4:/dist"
 }, {
   "prefix": "icons",
-  "root": "node_modules/bootstrap-icons"
+  "root": "bootstrap-icons:"
 }, {
   "prefix": "masonry",
-  "root": "node_modules/masonry-layout/dist"
+  "root": "masonry-layout:/dist"
 }, {
   "prefix": "highlight.js",
-  "root": "node_modules/@highlightjs/cdn-assets"
+  "root": "@highlightjs/cdn-assets:"
 }, {
   "prefix": "imagesloaded",
-  "root": "node_modules/imagesloaded"
+  "root": "imagesloaded:"
 }, {
   "prefix": "bootbox",
-  "root": "node_modules/bootbox/dist"
+  "root": "bootbox:/dist"
 }, {
   "prefix": "tempus-dominus",
-  "root": "node_modules/@eonasdan/tempus-dominus/dist"
+  "root": "@eonasdan/tempus-dominus:/dist"
 }]
