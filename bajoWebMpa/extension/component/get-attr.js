@@ -71,7 +71,7 @@ function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, pre
   if (postProcess) postProcess.call(this, { name, attr, context, args })
   if (attr.name) {
     attr.id = attr.id ?? `f-${attr.name}`
-    // attr.label = attr.label ?? print._format([context.ctx._meta.ns, 'bajoDb', 'bajoWebMpa'], `field.${attr.name}`, {}, {})
+    // attr.label = attr.label ?? print.__(`field.${attr.name}`, {}, { ns: [context.ctx._meta.ns, 'bajoDb', 'bajoWebMpa'] })
   }
   // denormalize styles
   let style = get(context, `ctx._meta.theme.component.${name}.style`, {})
