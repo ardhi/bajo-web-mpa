@@ -61,5 +61,9 @@
   },
   "multipart": {
   },
+  "cors": {},
+  "helmet": {},
+  "compress": false,
+  "rateLimit": false,
   "dependencies": ["bajo-web", "bajo-web-static"]
 }

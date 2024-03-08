@@ -19,12 +19,20 @@ const boot = {
     if (cfg.i18n.detectors.includes('path')) prefix = `/:lang${prefix}`
     const routeHook = await importModule(`${cfgWeb.dir.pkg}/lib/route-hook.js`)
     const handleMultipart = await importModule(`${cfgWeb.dir.pkg}/lib/handle-multipart-body.js`)
+    const handleCors = await importModule(`${cfgWeb.dir.pkg}/lib/handle-cors.js`)
+    const handleHelmet = await importModule(`${cfgWeb.dir.pkg}/lib/handle-helmet.js`)
+    const handleCompress = await importModule(`${cfgWeb.dir.pkg}/lib/handle-compress.js`)
+    const handleRateLimit = await importModule(`${cfgWeb.dir.pkg}/lib/handle-rate-limit.js`)
     await markdown.call(this)
     await this.bajoWeb.instance.register(async (ctx) => {
       this.bajoWebMpa.instance = ctx
       await runHook('bajoWebMpa:afterCreateContext', ctx)
       await setupSession.call(this, ctx)
       await ctx.register(bodyParser)
+      await handleRateLimit.call(this, ctx, cfg.rateLimit)
+      await handleCors.call(this, ctx, cfg.cors)
+      await handleHelmet.call(this, ctx, cfg.helmet)
+      await handleCompress.call(this, ctx, cfg.compress)
       await handleMultipart.call(this, ctx, cfg.multipart)
       await routeHook.call(this, 'bajoWebMpa')
       await error.call(this, ctx)
