@@ -1,6 +1,6 @@
 function format (text = '') {
   // const all = text.match(/<([^<>]*)>/g)
-  const { filter } = this.scope.bajoWebMpa.util
+  const { filter } = this.scope.bajo.helper._
   const all = filter((text ?? '').split('\n').map(t => {
     return t.replace(/\s\s+/g, ' ').replace('\r', '')
   }), a => !['', ' ', ' class=""', ' style=""'].includes(a))

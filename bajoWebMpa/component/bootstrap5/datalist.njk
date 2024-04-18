@@ -1,21 +1,21 @@
 <datalist
     class="{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    {%- if attr.options|is('plainObject') -%}
-    {%- for value, key in attr.options -%}
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {% if attr.options|is('plainObject') %}
+    {% for value, key in attr.options %}
     <option value="{{ value }}">{{ key }}</option>
-    {%- endfor -%}
-    {%- else -%}
-    {%- for opt in attr.options -%}
-    {%- if opt|is('string') -%}
+    {% endfor %}
+    {% else %}
+    {% for opt in attr.options %}
+    {% if opt|is('string') %}
     <option value="{{ opt }}"></option>
-    {%- elif opt|is('array') -%}
+    {% elif opt|is('array') %}
     <option value="{{ opt[0] }}">{{ opt[1] }}</option>
-    {%- else -%}
+    {% else %}
     <option value="{{ opt.value }}">{{ opt.text }}</option>
-    {%- endif -%}
-    {%- endfor -%}
-    {%- endif -%}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     </datalist>

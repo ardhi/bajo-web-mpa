@@ -1,4 +1,4 @@
-import format from './component/format.js'
+// import format from './component/format.js'
 import getAttr from './component/get-attr.js'
 
 const excludes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
@@ -21,10 +21,11 @@ class Cmp {
 
   run (context, ...args) {
     // const callback = args.pop()
-    const { kebabCase, fs, get, find } = this.scope.bajoWebMpa.util
+    const { kebabCase, get, find } = this.scope.bajo.helper._
+    const { fs } = this.scope.bajo.helper
     const { resolveComponentPath } = this.scope.bajoWebMpa.helper
-    const { getConfig } = this.scope.bajo.helper
-    const cfg = getConfig('bajoWebMpa')
+    // const { getConfig } = this.scope.bajo.helper
+    // const cfg = getConfig('bajoWebMpa')
     const body = args.pop()
     let name = args.shift()
     if (!excludes.includes(name)) name = kebabCase(name)
@@ -42,15 +43,15 @@ class Cmp {
     const { attr, attributes, params } = getAttr.call(this, { name, context, args }, handler)
     const locals = { cmp: name, params, attr, attributes, content: body(), form, error, _meta }
     const fragment = fs.readFileSync(file, 'utf8').replaceAll('\r', '') // TODO: replace new line inside the brackets only
-    const ret = context.env.renderString(fragment, locals)
+    return context.env.renderString(fragment, locals)
     /*
     const ret = context.env.render(`${item}:${theme.name}`, locals)
     */
-    return cfg.formatTagResult ? format.call(this, ret) : ret
+    // return cfg.formatTagResult ? format.call(this, ret) : ret
   }
 }
 
-async function cmp () {
+function cmp () {
   return new Cmp({ scope: this })
 }
 

@@ -5,10 +5,10 @@
     href="{{ attr.href|d('#') }}"
     {% if attr.active %}aria-current="page"{% endif %}
     {% if attr.disabled %}aria-disabled="true"{% endif %}
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     {% if attr.icon %}{% cmp 'icon', name=attr.icon %}{% endcmp %}{% endif %}
-    {{- attr.caption|d(content|safe) -}}
+    {{ attr.caption|d(content|safe) }}
     </a>
 {% else %}
 <li
@@ -18,10 +18,10 @@
     href="{{ attr.href|d('#') }}"
     {% if attr.active %}aria-current="page"{% endif %}
     {% if attr.disabled %}aria-disabled="true"{% endif %}
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     {% if attr.icon %}{% cmp 'icon', name=attr.icon %}{% endcmp %}{% endif %}
-    {{- attr.caption|d(content|safe) -}}
+    {{ attr.caption|d(content|safe) }}
     {% else %}
     class="{{ attr.classBase|d('nav-item') }}">
     <a
@@ -30,18 +30,18 @@
         href="{{ attr.href|d('#') }}"
         {% if attr.active %}aria-current="page"{% endif %}
         {% if attr.disabled %}aria-disabled="true"{% endif %}
-        {{ attributes|safe -}}
-        {{ params|join(' ') -}}>
+        {{ attributes|safe }}
+        {{ params|join(' ') }}>
         {% if attr.icon %}{% cmp 'icon', name=attr.icon %}{% endcmp %}{% endif %}
         {% if not attr.onParent %}
-        {{- attr.caption|d(content|safe) -}}
+        {{ attr.caption|d(content|safe) }}
         {% else %}
-        {{- attr.caption -}}
+        {{ attr.caption }}
         {% endif %}
         </a>
     {% endif %}
     {% if attr.onParent %}
-    {{- content|safe -}}
+    {{ content|safe }}
     {% endif %}
     </li>
 {% endif %}

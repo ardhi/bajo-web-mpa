@@ -2,82 +2,86 @@
 
 {% cmp 'navbar', margin='bottom3', border='bottom' %}
   {% cmp 'h5' %}{{ 'Attachment'|t }}{% endcmp %}
-  {% if not attr.schema.disabled|array('includes', 'remove') %}
+  {% if _meta.schema.attachment and not attr.schema.disabled|array('includes', 'remove') %}
     {% cmp 'button', sizing='small', id=attr.baseId + '-buttons-delete', tag='a', icon='crudDelete', variant='primary', disabled=true %}{% endcmp %}
   {% endif %}
 {% endcmp %}
 
-{% if attr.action === 'Add Record' %}
-  {% cmp 'alert', variant='info' %}{{ 'Attachment upload only available once a record is created'|t }}{% endcmp %}
-{% else %}
-  {% cmp 'table', id=attr.baseId %}
-    {% cmp 'tableHead' %}
-      {% cmp 'tableRow' %}
-        {% cmp 'tableHeader' %}
-          {% cmp 'check', class='check-toggler' %}{% endcmp %}
+{% if _meta.schema.attachment %}
+  {% if attr.action === 'Add Record' %}
+    {% cmp 'alert', variant='info' %}{{ 'Attachment upload only available once a record is created'|t }}{% endcmp %}
+  {% else %}
+    {% cmp 'table', id=attr.baseId %}
+      {% cmp 'tableHead' %}
+        {% cmp 'tableRow' %}
+          {% cmp 'tableHeader' %}
+            {% cmp 'check', class='check-toggler' %}{% endcmp %}
+          {% endcmp %}
+          {% cmp 'tableHeader' %}{{ 'field.field'|t }}{% endcmp %}
+          {% cmp 'tableHeader' %}{{ 'field.file'|t }}{% endcmp %}
         {% endcmp %}
-        {% cmp 'tableHeader' %}{{ 'field.field'|t }}{% endcmp %}
-        {% cmp 'tableHeader' %}{{ 'field.file'|t }}{% endcmp %}
+      {% endcmp %}
+      {% cmp 'tableBody', table='groupDivider' %}
+        {% for item in attr.record._attachment %}
+          {% cmp 'tableRow' %}
+            {% cmp 'tableDataCell' %}
+              {% cmp 'check', value=item.field + ':' + item.file %}{% endcmp %}
+            {% endcmp %}
+            {% cmp 'tableDataCell' %}{{ item.field }}{% endcmp %}
+            {% cmp 'tableDataCell' %}{{ item.file }}{% endcmp %}
+          {% endcmp %}
+        {% endfor %}
       {% endcmp %}
     {% endcmp %}
-    {% cmp 'tableBody', table='groupDivider' %}
-      {% for item in attr.record._attachment %}
-        {% cmp 'tableRow' %}
-          {% cmp 'tableDataCell' %}
-            {% cmp 'check', value=item.field + ':' + item.file %}{% endcmp %}
-          {% endcmp %}
-          {% cmp 'tableDataCell' %}{{ item.field }}{% endcmp %}
-          {% cmp 'tableDataCell' %}{{ item.file }}{% endcmp %}
-        {% endcmp %}
-      {% endfor %}
+
+    {% cmp 'form', id=attr.baseId + '-form', method='POST', action=attnRoute + '-upload?id=' + form.id, enctype='multipart/form-data' %}
+      {% cmp 'input', type='hidden', name='redirect', value=_meta.url %}{% endcmp %}
+      {% cmp 'formInput', name='field', labelFloating=true %}{% endcmp %}
+      {% cmp 'formInput', type='file', label=false %}{% endcmp %}
+      {% cmp 'div', display='flex', justifyContent='end' %}
+        {% cmp 'button', variant='primary', type='submit' %}{{ 'Upload'|t }}{% endcmp %}
+      {% endcmp %}
     {% endcmp %}
-  {% endcmp %}
 
-  {% cmp 'form', id=attr.baseId + '-form', method='POST', action=attnRoute + '-upload?id=' + form.id, enctype='multipart/form-data' %}
-    {% cmp 'input', type='hidden', name='redirect', value=_meta.url %}{% endcmp %}
-    {% cmp 'formInput', name='field', labelFloating=true %}{% endcmp %}
-    {% cmp 'formInput', type='file', label=false %}{% endcmp %}
-    {% cmp 'div', display='flex', justifyContent='end' %}
-      {% cmp 'button', variant='primary', type='submit' %}{{ 'Upload'|t }}{% endcmp %}
-    {% endcmp %}
-  {% endcmp %}
+    {% script %}
+    <script>
+      {% include 'cmp:_crud-script-navbar-buttons:bootstrap5' %}
+      {% include 'cmp:_crud-script-delete-prompt:bootstrap5' %}
 
-  {% script %}
-  <script>
-    {% include 'cmp:_crud-script-navbar-buttons:bootstrap5' %}
-    {% include 'cmp:_crud-script-delete-prompt:bootstrap5' %}
-
-    $('#{{ attr.baseId }}-form').submit(function (evt) {
-      evt.preventDefault()
-      $(this).find('input[type=file]').prop('name', $(this).find('input[name=field]').val())
-      $(this).unbind('submit').submit()
-    })
-
-    $('#{{ attr.baseId }} tbody tr').on('click', function () {
-      const el = $(this).find('input[type=checkbox]')
-      if (!el) return
-      el.prop('checked', !el.prop('checked'))
-      updateUi()
-    })
-    $('#{{ attr.baseId }} tbody tr input[type=checkbox]').on('click', function (evt) {
-      evt.stopPropagation()
-    })
-    toggler.on('change', function () {
-      $('#{{ attr.baseId }} input[type=checkbox]').prop('checked', $(this).is(':checked'))
-      updateUi()
-    })
-    $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler")').on('change', function () {
-      updateUi()
-    })
-    if (btnDelete) {
-      btnDelete.on('click', function () {
-        const ids = []
-        $('#{{ attr.baseId }} input[type=checkbox]:checked:not(".check-toggler")').each(function () {
-          ids.push($(this).val())
-        })
-        deleteRecord(ids, '{{ attnRoute }}-delete?id={{ form.id }}', '{{ _meta.url }}')
+      $('#{{ attr.baseId }}-form').submit(function (evt) {
+        evt.preventDefault()
+        $(this).find('input[type=file]').prop('name', $(this).find('input[name=field]').val())
+        $(this).unbind('submit').submit()
       })
-    }
-  </script>
-  {% endscript %}
+
+      $('#{{ attr.baseId }} tbody tr').on('click', function () {
+        const el = $(this).find('input[type=checkbox]')
+        if (!el) return
+        el.prop('checked', !el.prop('checked'))
+        updateUi()
+      })
+      $('#{{ attr.baseId }} tbody tr input[type=checkbox]').on('click', function (evt) {
+        evt.stopPropagation()
+      })
+      toggler.on('change', function () {
+        $('#{{ attr.baseId }} input[type=checkbox]').prop('checked', $(this).is(':checked'))
+        updateUi()
+      })
+      $('#{{ attr.baseId }} input[type=checkbox]:not(".check-toggler")').on('change', function () {
+        updateUi()
+      })
+      if (btnDelete) {
+        btnDelete.on('click', function () {
+          const ids = []
+          $('#{{ attr.baseId }} input[type=checkbox]:checked:not(".check-toggler")').each(function () {
+            ids.push($(this).val())
+          })
+          deleteRecord(ids, '{{ attnRoute }}-delete?id={{ form.id }}', '{{ _meta.url }}')
+        })
+      }
+    </script>
+    {% endscript %}
+  {% endif %}
+{% else %}
+  {% cmp 'alert', variant='danger' %}{{ 'Attachment is disabled for this collection'|t }}{% endcmp %}
 {% endif %}

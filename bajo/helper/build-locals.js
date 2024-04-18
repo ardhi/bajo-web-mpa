@@ -1,6 +1,6 @@
 async function buildLocals (name, params = {}, req, reply) {
-  const { importPkg, runHook, getConfig } = this.bajo.helper
-  const { find, merge, concat, pick, get } = await importPkg('lodash-es')
+  const { runHook, getConfig } = this.bajo.helper
+  const { find, merge, concat, pick, get } = this.bajo.helper._
   const cfg = getConfig('bajoWebMpa')
   const themes = this.bajoWebMpa.themes
   const theme = find(themes, { name: req.theme }) ?? {}

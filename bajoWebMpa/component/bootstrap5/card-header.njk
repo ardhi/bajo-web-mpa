@@ -1,7 +1,7 @@
 <{{ attr.tag|d('div') }}
     class="card-header{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    {{- attr.content|d(content|safe) -}}
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {{ attr.content|d(content|safe) }}
     </{{ attr.tag|d('div') }}>

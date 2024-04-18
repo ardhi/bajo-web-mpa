@@ -4,8 +4,8 @@
     aria-atomic="true"
     style="{{ attr.style }}"
     data-bs-autohide="true"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     {% if attr.title %}
       <div class="toast-header">
         <strong class="me-auto">{{ attr.title }}</strong>
@@ -14,6 +14,6 @@
       </div>
     {% endif %}
     <div class="toast-body">
-    {{- attr.content|d(content|safe) -}}
+    {{ attr.content|d(content|safe) }}
     </div>
 </div>

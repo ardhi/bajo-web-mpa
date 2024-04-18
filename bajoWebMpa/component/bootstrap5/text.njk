@@ -1,7 +1,7 @@
 <div
   class="{{ attr.classBase|d('form-text') }}{{ attr.class }}"
   style="{{ attr.style }}"
-  {{ attributes|safe -}}
-  {{ params|join(' ') -}}>
-    {{- content|d(attr.text|safe) -}}
+  {{ attributes|safe }}
+  {{ params|join(' ') }}>
+    {{ content|d(attr.text|safe) }}
   </div>

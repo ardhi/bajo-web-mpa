@@ -1,21 +1,21 @@
-{%- set user %}
+{% set user %}
 {% if _meta.flash.dbsuccess and _meta.user.id === _meta.flash.dbsuccess[0].record.data.id %}
 {{ _meta.flash.dbsuccess[0].record.data.firstName + ' ' + _meta.flash.dbsuccess[0].record.data.lastName }}
 {% else %}
 {{ _meta.user|ternary(_meta.user.firstName + ' ' + _meta.user.lastName, 'Guest'|t) }}
 {% endif %}
-{% endset -%}
+{% endset %}
 {% cmp 'navItemDropdown',
   icon='account',
   caption=user,
   onParent=true %}
   {% cmp 'dropdownMenu' %}
     {% for m in _meta.menu.user %}
-      {% if m === '-' -%}
+      {% if m === '-' %}
       <li><hr class="dropdown-divider"></li>
       {% else %}
       <li><a class="dropdown-item" href="{{ m.value }}">{{ m.text|t }}</a></li>
-      {% endif -%}
+      {% endif %}
     {% endfor %}
   {% endcmp %}
 {% endcmp %}

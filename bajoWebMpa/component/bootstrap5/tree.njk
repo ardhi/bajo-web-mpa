@@ -1,8 +1,8 @@
 <{{ attr.tag|d('ol') }}
     class="{{ attr.classBase }}{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
       {% for o in attr.options %}
       {% cmp 'li' %}
         {% if o.prefix %}{{ o.prefix }}{% endif %}

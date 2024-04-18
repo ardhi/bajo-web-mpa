@@ -1,8 +1,8 @@
 <div
   class="offcanvas-header{{ attr.class }}"
   style="{{ attr.style }}"
-  {{ attributes|safe -}}
-  {{ params|join(' ') -}}>
+  {{ attributes|safe }}
+  {{ params|join(' ') }}>
   {% if attr.title %}
     <h5 class="offcanvas-title" id="{{ attr.titleId|d('offcanvasLabel') }}">{{ attr.title }}</h5>
   {% endif %}

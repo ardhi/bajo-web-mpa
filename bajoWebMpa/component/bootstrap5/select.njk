@@ -1,21 +1,21 @@
 <select
     class="{{ attr.classBase|d('form-select') }}{% if attr.sizing %} form-control-{{ attr.sizing }}{% endif %}{% if attr.error %} is-invalid{% elif attr.success %} is-valid{% endif %}{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    {%- if attr.options|is('plainObject') -%}
-    {%- for value, key in attr.options -%}
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {% if attr.options|is('plainObject') %}
+    {% for value, key in attr.options %}
     <option value="{{ value }}">{{ key }}</option>
-    {%- endfor -%}
-    {%- else -%}
-    {%- for opt in attr.options -%}
-    {%- if opt|is('string') -%}
+    {% endfor %}
+    {% else %}
+    {% for opt in attr.options %}
+    {% if opt|is('string') %}
     <option value="{{ opt }}"></option>
-    {%- elif opt|is('array') -%}
+    {% elif opt|is('array') %}
     <option value="{{ opt[0] }}"{% if opt[2] %} selected{% endif %}>{{ opt[1] }}</option>
-    {%- else -%}
+    {% else %}
     <option value="{{ opt.value }}"{% if opt.selected %} selected{% endif %}>{{ opt.text|d(opt.value) }}</option>
-    {%- endif -%}
-    {%- endfor -%}
-    {%- endif -%}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     </select>

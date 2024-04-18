@@ -9,8 +9,8 @@
 <fieldset
     class="{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     {% if attr.legend %}
     <legend>{{ attr.legend }}</legend>
     {% endif %}
@@ -25,6 +25,6 @@
         {% endfor %}
       {% endcmp %}
     {% else %}
-    {{- content|safe -}}
+    {{ content|safe }}
     {% endif %}
     </fieldset>

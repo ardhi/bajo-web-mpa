@@ -1,5 +1,5 @@
 function kebabCase (env, text) {
-  return this.bajoWebMpa.util.kebabCase(text)
+  return this.bajo.helper._.kebabCase(text)
 }
 
 export default kebabCase

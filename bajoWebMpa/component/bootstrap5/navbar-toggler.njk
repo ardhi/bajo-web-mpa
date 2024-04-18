@@ -7,7 +7,7 @@
     aria-controls="{{ attr.collapseId }}"
     aria-expanded="false"
     aria-label="{{ attr.ariaLabel|d('Toggle navigation') }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
       <span class="navbar-toggler-icon"></span>
     </button>

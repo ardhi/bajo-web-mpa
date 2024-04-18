@@ -1,5 +1,5 @@
 function pick (env, obj, params = []) {
-  const { pick } = this.bajoWebMpa.util
+  const { pick } = this.bajo.helper._
   return pick(obj, params)
 }
 

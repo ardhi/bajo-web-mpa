@@ -1,7 +1,7 @@
 <div
   class="btn-group{% if attr.vertical %}-vertical{% endif %}{% if attr.sizing %} btn-group-{{ attr.sizing }}{% endif %}{{ attr.class}}"
   style="{{ attr.style }}"
-  {{ attributes|safe -}}
+  {{ attributes|safe }}
   {{ params|join(' ') }}
   role="group"
   aria-label="{{ attr.ariaLabel }}">
@@ -61,6 +61,6 @@
       {% endfor %}
     {% endif %}
   {% else %}
-    {{- content|safe -}}
+    {{ content|safe }}
   {% endif %}
 </div>

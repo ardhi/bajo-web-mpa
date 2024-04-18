@@ -1,7 +1,7 @@
 <h5
     class="card-title{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    {{- attr.content|d(content|safe) -}}
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {{ attr.content|d(content|safe) }}
     </h5>

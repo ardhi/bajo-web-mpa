@@ -1,11 +1,11 @@
 function parseAsClass (text) {
-  const { trim } = this.scope.bajoWebMpa.util
+  const { trim } = this.scope.bajo.helper._
   const separator = text.includes(',') ? ',' : ' '
   return text.split(separator).map(c => trim(c))
 }
 
 function parseAsStyle (text) {
-  const { trim, camelCase } = this.scope.bajoWebMpa.util
+  const { trim, camelCase } = this.scope.bajo.helper._
   const parts = text.split(';').map(s => trim(s))
   const style = {}
   parts.forEach(p => {
@@ -16,7 +16,7 @@ function parseAsStyle (text) {
 }
 
 function stringifyStyle (obj) {
-  const { forOwn, kebabCase } = this.scope.bajoWebMpa.util
+  const { forOwn, kebabCase } = this.scope.bajo.helper._
   const styles = []
   forOwn(obj, (v, k) => {
     styles.push(`${kebabCase(k)}:${v}`)
@@ -26,7 +26,7 @@ function stringifyStyle (obj) {
 
 function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, preProcess, postProcess } = {}) {
   const { isSet } = this.scope.bajo.helper
-  const { omit, kebabCase, isEmpty, isArray, isString, get, concat, merge } = this.scope.bajoWebMpa.util
+  const { omit, kebabCase, isEmpty, isArray, isString, get, concat, merge } = this.scope.bajo.helper._
   const attr = omit(args.pop() ?? {}, ['__keywords'])
   // normalize classes
   attr.class = attr.class ?? []

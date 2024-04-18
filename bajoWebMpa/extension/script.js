@@ -17,17 +17,17 @@ class Script {
   }
 
   run (context, ...args) {
-    const { isEmpty } = this.scope.bajoWebMpa.util
+    const { isEmpty } = this.scope.bajo.helper._
     const body = args.pop()
     const $ = cheerio.load(body())
     let content = $('script').text()
     if (isEmpty(content)) content = body()
     context.ctx._meta.script = context.ctx._meta.script ?? []
-    context.ctx._meta.script.push(content)
+    context.ctx._meta.script.push(...content.split('\n'))
   }
 }
 
-async function script () {
+function script () {
   return new Script({ scope: this })
 }
 

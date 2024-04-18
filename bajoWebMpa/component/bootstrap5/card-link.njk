@@ -2,7 +2,7 @@
     class="card-link{% if attr.stretchedLink %} stretched-link{% endif %}{{ attr.class }}"
     style="{{ attr.style }}"
     href="{{ attr.href|d('#') }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    {{- attr.content|d(content|safe) -}}
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {{ attr.content|d(content|safe) }}
     </a>

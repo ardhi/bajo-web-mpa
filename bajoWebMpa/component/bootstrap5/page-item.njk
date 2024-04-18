@@ -1,10 +1,10 @@
 <li
   class="page-item{% if attr.active %} active{% endif %}{% if attr.disabled %} disabled{% endif %}{{ attr.class }}"
-  {{ attributes|safe -}}
-  {{ params|join(' ') -}}>
+  {{ attributes|safe }}
+  {{ params|join(' ') }}>
   {% if attr.href %}
-    {% cmp 'a', class='page-link', href=attr.href %}{{- attr.caption|d(content|safe) -}}{% endcmp %}
+    {% cmp 'a', class='page-link', href=attr.href %}{{ attr.caption|d(content|safe) }}{% endcmp %}
   {% else %}
-    {% cmp 'div', class='page-link' %}{{- attr.caption|d(content|safe) -}}{% endcmp %}
+    {% cmp 'div', class='page-link' %}{{ attr.caption|d(content|safe) }}{% endcmp %}
   {% endif %}
 </li>

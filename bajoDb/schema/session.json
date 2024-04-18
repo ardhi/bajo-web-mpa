@@ -6,5 +6,6 @@
     "name": "expires",
     "type": "datetime"
   }],
-  "feature": ["createdAt", "updatedAt"]
+  "feature": ["createdAt", "updatedAt"],
+  "attachment": false
 }

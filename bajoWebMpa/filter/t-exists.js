@@ -1,5 +1,5 @@
 function tExists (env, key, opts = {}) {
-  const { isString } = this.bajoWebMpa.util
+  const { isString } = this.bajo.helper._
   const { i18n, tpl } = env.ctx._meta
   if (!i18n) return false
   if (isString(opts)) opts = { ns: opts }

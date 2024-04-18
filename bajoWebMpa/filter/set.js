@@ -1,5 +1,5 @@
 function set (env, obj = {}, key, def) {
-  const { set } = this.bajoWebMpa.util
+  const { set } = this.bajo.helper._
   return set(obj, key, def)
 }
 

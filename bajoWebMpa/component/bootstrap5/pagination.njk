@@ -7,8 +7,8 @@
 {% set layout = paginationLayout(attr.options.count, attr.options.limit, attr.options.page) %}
   <ul
     class="pagination{{ attr.class }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     {% if layout.length > 1 %}
       {% if attr.options.page > 1 %}
         {% set params = attr.options|pick(['query', 'limit'])|set('sort', _meta.query.sort|d(''))|set('page', attr.options.page - 1) %}
@@ -24,7 +24,7 @@
         {% cmp 'pageItem', active=o.active, disabled=o.disabled, caption=attr.options.captionNext|d('Next')|t, href='?' + params|qsStringify() %}{% endcmp %}
       {% endif %}
     {% else %}
-      {{- content|safe -}}
+      {{ content|safe }}
     {% endif %}
   </ul>
 {% if attr.wrapper|d(true) %}

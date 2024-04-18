@@ -1,7 +1,7 @@
 <label
     class="{{ attr.classBase|d('form-label') }}{{ attr.class }}"
     style="{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
-    {{- attr.label|d(content|safe) -}}
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
+    {{ attr.label|d(content|safe) }}
     </label>

@@ -3,8 +3,8 @@
     style="{{ attr.style }}"
     {% if attr.active %}aria-current="true"{% endif %}
     {% if attr.disabled %}aria-disabled="true"{% endif %}
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     {% if attr.icon %}{% cmp 'icon', name=attr.icon, margin='end2' %}{% endcmp %}{% endif %}
-    {{- content|safe -}}
+    {{ content|safe }}
     </{% if attr.href %}a{% else %}li{% endif %}>

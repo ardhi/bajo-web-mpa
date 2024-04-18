@@ -2,8 +2,8 @@
     aria-label="breadcrumb"
     class="{{ attr.class}}"
     style="{% if attr.divider %}--bs-breadcrumb-divider: {{ attr.divider|safe }};{% endif %}{{ attr.style }}"
-    {{ attributes|safe -}}
-    {{ params|join(' ') -}}>
+    {{ attributes|safe }}
+    {{ params|join(' ') }}>
     <ol class="breadcrumb mb-0">
         {% for item in attr.options %}
         {% if item.active %}

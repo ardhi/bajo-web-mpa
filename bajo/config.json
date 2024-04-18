@@ -29,7 +29,7 @@
   },
   "emoji": true,
   "prettier": {
-    "enabled": false,
+    "enabled": true,
     "options": {
       "parser": "html",
       "printWidth": 1000
@@ -62,9 +62,12 @@
   "multipart": {
   },
   "cors": {},
-  "helmet": {},
+  "helmet": {
+    "contentSecurityPolicy": false
+  },
   "compress": false,
   "rateLimit": false,
+  "traceNoTemplate": false,
   "disabled": [],
   "dependencies": ["bajo-web", "bajo-web-static"]
 }

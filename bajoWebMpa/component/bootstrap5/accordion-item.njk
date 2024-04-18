@@ -1,8 +1,8 @@
 <div
   class="accordion-item{{ attr.class }}"
   style="{{ attr.style }}"
-  {{ attributes|safe -}}
-  {{ params|join(' ') -}}>
+  {{ attributes|safe }}
+  {{ params|join(' ') }}>
   <h2
     class="accordion-header">
     <button
@@ -23,7 +23,7 @@
     {% endif %}>
     <div
       class="accordion-body">
-      {{- attr.content|d(content|safe) -}}
+      {{ attr.content|d(content|safe) }}
     </div>
   </div>
 </div>

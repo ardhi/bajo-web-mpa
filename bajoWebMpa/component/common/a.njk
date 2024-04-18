@@ -4,5 +4,5 @@
   {{ attributes|safe }}
   {{ params|join(' ') }}>
   {% if attr.icon %}{% cmp 'icon', name=attr.icon, margin=attr.iconMargin, text=attr.iconText %}{% endcmp %}{% endif %}
-  {{- content|safe -}}
+  {{ content|safe }}
 </a>

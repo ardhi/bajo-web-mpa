@@ -12,7 +12,7 @@ const boot = {
   level: 10,
   handler: async function () {
     const { getConfig, importPkg, importModule, runHook } = this.bajo.helper
-    const bodyParser = await importPkg('bajo-web:@fastify/formbody')
+    const bodyParser = await importPkg('bajoWeb:@fastify/formbody')
     const cfg = getConfig('bajoWebMpa')
     const cfgWeb = getConfig('bajoWeb', { full: true })
     let prefix = cfg.prefix === '' ? '' : ('/' + cfg.prefix)

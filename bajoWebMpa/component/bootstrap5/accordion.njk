@@ -1,8 +1,8 @@
 <div
   class="accordion{% if attr.flush %} accordion-flush{% endif %}{{ attr.class }}"
   style="{{ attr.style }}"
-  {{ attributes|safe -}}
-  {{ params|join(' ') -}}>
+  {{ attributes|safe }}
+  {{ params|join(' ') }}>
   {% if attr.options %}
     {% for item in attr.options %}
       {% cmp 'accordion-item',
@@ -14,6 +14,6 @@
         content=item.content %}{% endcmp %}
     {% endfor %}
   {% else %}
-    {{- content|safe -}}
+    {{ content|safe }}
   {% endif %}
 </div>
