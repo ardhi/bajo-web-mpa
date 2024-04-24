@@ -1,11 +1,9 @@
 {
-  "properties": [{
-    "name": "session",
-    "type": "text"
-  }, {
-    "name": "expires",
-    "type": "datetime"
-  }],
+  "properties": [
+    "id::100:primary:true",
+    "session:text",
+    "expires:datetime"
+  ],
   "feature": ["createdAt", "updatedAt"],
   "attachment": false
 }
