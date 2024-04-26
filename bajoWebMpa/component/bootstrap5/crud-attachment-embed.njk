@@ -1,13 +1,12 @@
 {% set attnRoute = routePath(attr.baseRoute, { params: _meta.params }) %}
-
 {% cmp 'navbar', margin='bottom3', border='bottom' %}
   {% cmp 'h5' %}{{ 'Attachment'|t }}{% endcmp %}
-  {% if _meta.schema.attachment and not attr.schema.disabled|array('includes', 'remove') %}
+  {% if schema.attachment and not attr.schema.disabled|array('includes', 'remove') %}
     {% cmp 'button', sizing='small', id=attr.baseId + '-buttons-delete', tag='a', icon='crudDelete', variant='primary', disabled=true %}{% endcmp %}
   {% endif %}
 {% endcmp %}
 
-{% if _meta.schema.attachment %}
+{% if schema.attachment %}
   {% if attr.action === 'Add Record' %}
     {% cmp 'alert', variant='info' %}{{ 'Attachment upload only available once a record is created'|t }}{% endcmp %}
   {% else %}

@@ -57,7 +57,7 @@ function getAttr ({ name, context, args } = {}, { parseForClass, selectAttr, pre
       if (ret) continue
     }
     const key = kebabCase(k)
-    if (name !== 'column') {
+    if (name !== 'column' && attr[k] !== Object(attr[k])) {
       if (attr[k] === true) {
         attributes.push(`${key}`)
       } else if (attr[k] !== false) {
