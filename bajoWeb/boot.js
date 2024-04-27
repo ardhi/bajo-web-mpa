@@ -14,15 +14,14 @@ const boot = {
     const { getConfig, importPkg, importModule, runHook } = this.bajo.helper
     const bodyParser = await importPkg('bajoWeb:@fastify/formbody')
     const cfg = getConfig('bajoWebMpa')
-    const cfgWeb = getConfig('bajoWeb', { full: true })
     let prefix = cfg.prefix === '' ? '' : ('/' + cfg.prefix)
     if (cfg.i18n.detectors.includes('path')) prefix = `/:lang${prefix}`
-    const routeHook = await importModule(`${cfgWeb.dir.pkg}/lib/route-hook.js`)
-    const handleMultipart = await importModule(`${cfgWeb.dir.pkg}/lib/handle-multipart-body.js`)
-    const handleCors = await importModule(`${cfgWeb.dir.pkg}/lib/handle-cors.js`)
-    const handleHelmet = await importModule(`${cfgWeb.dir.pkg}/lib/handle-helmet.js`)
-    const handleCompress = await importModule(`${cfgWeb.dir.pkg}/lib/handle-compress.js`)
-    const handleRateLimit = await importModule(`${cfgWeb.dir.pkg}/lib/handle-rate-limit.js`)
+    const routeHook = await importModule('bajoWeb:/lib/route-hook.js')
+    const handleMultipart = await importModule('bajoWeb:/lib/handle-multipart-body.js')
+    const handleCors = await importModule('bajoWeb:/lib/handle-cors.js')
+    const handleHelmet = await importModule('bajoWeb:/lib/handle-helmet.js')
+    const handleCompress = await importModule('bajoWeb:/lib/handle-compress.js')
+    const handleRateLimit = await importModule('bajoWeb:/lib/handle-rate-limit.js')
     await markdown.call(this)
     await this.bajoWeb.instance.register(async (ctx) => {
       this.bajoWebMpa.instance = ctx

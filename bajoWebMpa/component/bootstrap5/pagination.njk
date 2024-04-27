@@ -11,16 +11,16 @@
     {{ params|join(' ') }}>
     {% if layout.length > 1 %}
       {% if attr.options.page > 1 %}
-        {% set params = attr.options|pick(['query', 'limit'])|set('sort', _meta.query.sort|d(''))|set('page', attr.options.page - 1) %}
+        {% set params = _meta.query|omit(_meta.qsKey.page)|set(_meta.qsKey.page, attr.options.page - 1) %}
         {% cmp 'pageItem', active=o.active, disabled=o.disabled, caption=attr.options.captionPrev|d('Previous')|t, href='?' + params|qsStringify %}{% endcmp %}
       {% endif %}
       {% for i in layout %}
-        {% set params = attr.options|pick(['query', 'limit'])|set('sort', _meta.query.sort|d(''))|set('page', i) %}
+        {% set params = _meta.query|omit(_meta.qsKey.page)|set(_meta.qsKey.page, i) %}
         {% set href = (i === '...')|ternary(false, ('?' + params|qsStringify())) %}
         {% cmp 'pageItem', active=i === attr.options.page, caption=i, href=href %}{% endcmp %}
       {% endfor %}
       {% if attr.options.page < attr.options.pages %}
-        {% set params = attr.options|pick(['query', 'limit'])|set('sort', _meta.query.sort|d(''))|set('page', attr.options.page + 1) %}
+        {% set params = _meta.query|omit(_meta.qsKey.page)|set(_meta.qsKey.page, attr.options.page + 1) %}
         {% cmp 'pageItem', active=o.active, disabled=o.disabled, caption=attr.options.captionNext|d('Next')|t, href='?' + params|qsStringify() %}{% endcmp %}
       {% endif %}
     {% else %}

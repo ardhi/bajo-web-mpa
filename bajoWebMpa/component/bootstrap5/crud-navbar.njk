@@ -3,7 +3,7 @@
     {% cmp 'input', name='query', margin='end2', type='search', placeholder='Search'|t, ariaLabel='Search', value=_meta.query.query %}{% endcmp %}
   {% endcmp %}
   {% cmp 'crudButtons', route=attr.baseRoute, schema=attr.schema, id=attr.baseId, view=attr.view %}{% endcmp %}
-  {% cmp 'viewTypeButtons', view=attr.view, types=['table', 'gridSmall', 'grid'] %}{% endcmp %}
+  {% cmp 'viewTypeButtons', view=attr.view, types=attr.types %}{% endcmp %}
 {% endcmp %}
 
 {% script %}

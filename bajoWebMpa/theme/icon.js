@@ -27,7 +27,8 @@ const icon = {
   crudEdit: 'bi bi-pen',
   crudAdd: 'bi bi-plus-circle',
   slider: 'bi bi-sliders',
-  gear: 'bi bi-gear'
+  gear: 'bi bi-gear',
+  stat: 'bi bi-graph-up'
 }
 
 export default icon
