@@ -19,6 +19,7 @@ async function buildLocals (name, params = {}, req, reply) {
     }
   }
   merge(_meta, pick(req, ['url', 'params', 'query']))
+  _meta.url = _meta.url.split('?')[0].split('#')[0]
   _meta.qsKey = cfgWeb.qsKey
   _meta.route = get(req, 'routeOptions.url')
   if (req.session) _meta.flash = reply.flash()

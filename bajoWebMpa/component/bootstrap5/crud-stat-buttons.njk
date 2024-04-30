@@ -1,0 +1,18 @@
+{% set id = attr.id + '-charts' %}
+{% set baseOpts = schema.stat %}
+{% cmp 'div' %}
+  {% cmp 'div', display='flex', alignItems='center' %}
+    {% cmp 'buttonGroup', outline=true, radio=true, margin='bottom2,end2' %}
+      {% for stat in attr.stats %}
+        {% cmp 'radio', classBase='btn-check', checked=stat === attr.stat %}{% endcmp %}
+        {% cmp 'label', classBase='btn', class='btn-outline-primary' %}
+          {% set params = _meta.query|pick(['query', 'sort'])|set('stat', stat)|set('baseField', attr.baseField) %}
+          {% set url = routePath(attr.route + '/stat/%s/%s/%s'|sprintf(stat, attr.agg, attr.chart), { params: _meta.params }) %}
+          {% cmp 'a', href=url + '?' + _meta.query|qsStringify, text=(attr.stat === stat)|ternary('white', undefined), stretchedLink=true %}
+            {{ stat|t }}
+          {% endcmp %}
+        {% endcmp %}
+      {% endfor %}
+    {% endcmp %}
+  {% endcmp %}
+{% endcmp %}

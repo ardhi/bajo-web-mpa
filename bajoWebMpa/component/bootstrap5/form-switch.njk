@@ -1,5 +1,5 @@
 {% cmp 'div',
-    class=attr.label|ternary('form-check ', '') + attr.inline|ternary('form-check-inline ', '') + attr.reverse|ternary('form-check-reverse ', '') + attr.wrapperClass|d('mb-3'),
+    class=attr.label|ternary('form-switch ', '') + attr.inline|ternary('form-check-inline ', '') + attr.reverse|ternary('form-check-reverse ', '') + attr.wrapperClass|d('mb-3'),
     style=attr.wrapperStyle,
     id=attr.wrapperId %}
   {% cmp 'check',

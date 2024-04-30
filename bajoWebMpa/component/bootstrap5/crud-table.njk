@@ -10,9 +10,11 @@
 {% cmp 'table', responsive=true, table='hover', id=attr.id %}
   {% cmp 'tableHead' %}
     {% cmp 'tableRow' %}
-      {% cmp 'tableHeader' %}
-        {% cmp 'check', class='check-toggler' %}{% endcmp %}
-      {% endcmp %}
+      {% if not attr.plain %}
+        {% cmp 'tableHeader' %}
+          {% cmp 'check', class='check-toggler' %}{% endcmp %}
+        {% endcmp %}
+      {% endif %}
       {% for p in attr.schema.properties %}
         {% cmp 'tableHeader', text=centers|array('includes', p.type)|ternary('end', '') + ',nowrap'  %}
           {% set label = p.label|ternary('field.' + p.label, 'field.' + p.name)|t %}
@@ -32,9 +34,11 @@
   {% cmp 'tableBody', table='groupDivider' %}
     {% for r in attr.records %}
       {% cmp 'tableRow' %}
-        {% cmp 'tableDataCell' %}
-          {% cmp 'check', value=r.id %}{% endcmp %}
-        {% endcmp %}
+        {% if not attr.plain %}
+          {% cmp 'tableDataCell' %}
+            {% cmp 'check', value=r.id %}{% endcmp %}
+          {% endcmp %}
+        {% endif %}
         {% for p in attr.schema.properties %}
           {% if p.type === 'boolean' %}
             {% cmp 'tableDataCell', text='center' %}

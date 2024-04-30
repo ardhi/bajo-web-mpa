@@ -1,0 +1,12 @@
+{% cmp 'div',
+    class=attr.labelFloating|ternary('form-floating ', '') + attr.wrapperClass|d('mb-3'),
+    style=attr.wrapperStyle,
+    id=attr.wrapperId %}
+  {% if attr.labelFloating %}
+    {{ content }}
+    {% include 'cmp:_form-label:bootstrap5' %}
+  {% else %}
+    {% include 'cmp:_form-label:bootstrap5' %}
+    {{ content }}
+  {% endif %}
+{% endcmp %}

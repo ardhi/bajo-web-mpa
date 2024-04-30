@@ -69,5 +69,18 @@
   "rateLimit": false,
   "traceNoTemplate": false,
   "disabled": [],
+  "virtuals": {
+    "jquery": true,
+    "prismjs": true,
+    "bs5": true,
+    "bs4": false,
+    "icons": true,
+    "masonry": true,
+    "highlightjs": false,
+    "imagesloaded": true,
+    "bootbox": true,
+    "tempusDominus": true,
+    "echarts": false
+  },
   "dependencies": ["bajo-web", "bajo-web-static"]
 }
