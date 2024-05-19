@@ -1,5 +1,7 @@
+import qs from 'querystring'
+
 function qsStringify (env, obj) {
-  return this.bajoWebMpa.util.qs.stringify(obj)
+  return qs.stringify(obj)
 }
 
 export default qsStringify

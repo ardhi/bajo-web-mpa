@@ -4,7 +4,7 @@ import buildRoutes from '../lib/build-routes.js'
 import subApp from '../lib/sub-app.js'
 import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
-import home from '../lib/home.js'
+// import home from '../lib/home.js'
 import setupSession from '../lib/session/setup.js'
 import markdown from '../lib/markdown/instance.js'
 
@@ -39,9 +39,9 @@ const boot = {
       await decorate.call(this, ctx)
       await subApp.call(this, ctx)
       await runHook('bajoWebMpa:beforeCreateRoutes', ctx)
-      await buildRoutes.call(this, ctx)
+      await buildRoutes.call(this, ctx, prefix)
       await runHook('bajoWebMpa:afterCreateRoutes', ctx)
-      await home.call(this, ctx)
+      // await home.call(this, ctx)
       await notFound.call(this, ctx)
     }, { prefix })
   }

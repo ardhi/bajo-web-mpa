@@ -1,9 +1,8 @@
 function mailto (env, text) {
-  const { emailAddresses } = this.bajoWebMpa.util
-  const { isEmpty } = this.bajo.helper._
-  let { address, name } = emailAddresses.parseOneAddress(text)
-  if (isEmpty(name)) name = address
-  return `<a href="mailto:${address}">${name}</a>`
+  let [name, email] = text.split(' <')
+  if (!email) email = name
+  email = email.replaceAll('<', '').replaceAll('>', '')
+  return `<a href="mailto:${email}">${name}</a>`
 }
 
 export default mailto
