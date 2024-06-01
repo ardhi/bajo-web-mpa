@@ -1,6 +1,6 @@
 {
   "name": "bajo-web-mpa",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "MPA Web Server Plugin for Bajo Framework",
   "main": "index.js",
   "scripts": {

@@ -5,7 +5,6 @@ import subApp from '../lib/sub-app.js'
 import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
 // import home from '../lib/home.js'
-import setupSession from '../lib/session/setup.js'
 import markdown from '../lib/markdown/instance.js'
 
 const boot = {
@@ -26,7 +25,6 @@ const boot = {
     await this.bajoWeb.instance.register(async (ctx) => {
       this.bajoWebMpa.instance = ctx
       await runHook('bajoWebMpa:afterCreateContext', ctx)
-      await setupSession.call(this, ctx)
       await ctx.register(bodyParser)
       await handleRateLimit.call(this, ctx, cfg.rateLimit)
       await handleCors.call(this, ctx, cfg.cors)

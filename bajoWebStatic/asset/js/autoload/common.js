@@ -1,3 +1,11 @@
+/* global $, helper */
+const helper = {}
+helper.bufferToObject = function (data) {
+  const buffer = new Uint8Array(data)
+  const text = String.fromCharCode.apply(null, buffer)
+  return JSON.parse(text)
+}
+
 window.onload = function () {
   const imgDefer = document.getElementsByTagName('img')
   for (let i = 0; i < imgDefer.length; i++) {

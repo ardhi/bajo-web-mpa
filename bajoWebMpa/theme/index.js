@@ -2,7 +2,7 @@ import icon from './icon.js'
 import mapping from './mapping.js'
 
 async function themes () {
-  const { getConfig } = this.bajo.helper
+  const { getConfig, eachPlugins, runHook } = this.bajo.helper
   const cfg = getConfig('bajoWebMpa')
   const { virtualDir, assetDir } = this.bajoWebStatic.helper
 
@@ -12,7 +12,12 @@ async function themes () {
   if (cfg.virtuals.imagesloaded) commonScript.push(`${virtualDir('bajoWebMpa')}/imagesloaded/imagesloaded.pkgd.min.js`)
   if (cfg.virtuals.tempusDominus) commonScript.push(`${virtualDir('bajoWebMpa')}/tempus-dominus/js/tempus-dominus.min.js`)
   if (cfg.virtuals.echarts) commonScript.push(`${virtualDir('bajoWebMpa')}/echarts/echarts.min.js`)
-  commonScript.push(`${assetDir('bajoWebMpa')}/js/common.js`)
+  await runHook('bajoWebMpa:afterCommonScriptCollect', commonScript)
+  await eachPlugins(async function ({ plugin, file, dir }) {
+    const path = assetDir(plugin) + file.replace(`${dir}/asset`, '')
+    commonScript.push(path)
+  }, { glob: 'asset/js/autoload/**/*.js', ns: 'bajoWebStatic' })
+  await runHook('bajoWebMpa:afterAllScriptCollect', commonScript)
 
   const commonCss = []
   if (cfg.virtuals.icons) commonCss.push(`${virtualDir('bajoWebMpa')}/icons/font/bootstrap-icons.min.css`)
