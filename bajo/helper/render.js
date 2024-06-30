@@ -5,9 +5,11 @@ import path from 'path'
 
 async function render (name, locals = {}, options = {}) {
   const { getConfig } = this.bajo.helper
+  const { getFileAndTheme } = this.bajoWebMpa.helper
   const { isEmpty } = this.bajo.helper._
   const cfg = getConfig('bajoWebMpa')
-  const ext = isEmpty(name) ? '.njk' : path.extname(name)
+  const { file } = getFileAndTheme(name)
+  const ext = isEmpty(name) ? '.njk' : path.extname(file)
 
   let content
   if (cfg.viewEngine !== '' && this[cfg.viewEngine]) content = await this[cfg.viewEngine].helper.render(name, locals, options)
