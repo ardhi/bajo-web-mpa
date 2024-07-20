@@ -1,8 +1,0 @@
-function cloneRecord (payload) {
-  payload = JSON.parse(payload)
-  for (const i of ['id', 'createdAt', 'updatedAt']) {
-    delete payload[i]
-  }
-  payload = btoa(JSON.stringify(payload))
-  location.href = '{{ routePath(baseRoute|d(attr.baseRoute), { params: _meta.params }) }}/add?payload=' + payload
-}

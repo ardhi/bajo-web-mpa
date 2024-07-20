@@ -1,8 +1,0 @@
-<a
-  class="{{ attr.class }}"
-  style="{{ attr.style }}"
-  {{ attributes|safe }}
-  {{ params|join(' ') }}>
-  {% if attr.icon %}{% cmp 'icon', name=attr.icon, margin=attr.iconMargin, text=attr.iconText %}{% endcmp %}{% endif %}
-  {{ content|safe }}
-</a>

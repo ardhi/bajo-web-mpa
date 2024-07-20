@@ -1,8 +1,0 @@
-<{{ attr.href|ternary('a', 'div') }}
-    class="navbar-brand{{ attr.class }}"
-    style="{{ attr.style }}"
-    {% if attr.href %}href="{{ attr.href }}"{% endif %}
-    {{ attributes|safe }}
-    {{ params|join(' ') }}>
-    {{ content|safe }}
-    </{{ attr.href|ternary('a', 'div') }}>

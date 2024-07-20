@@ -1,7 +1,0 @@
-<div
-    class="container{% if attr.sizing %}-{{ attr.sizing }}{% elif attr.fluid %}-fluid{% endif %}{{ attr.class }}"
-    style="{{ attr.style }}"
-    {{ attributes|safe }}
-    {{ params|join(' ') }}>
-    {{ attr.content|d(content|safe) }}
-    </div>

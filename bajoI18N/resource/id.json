@@ -1,6 +1,6 @@
 {
   "More": "Lagi",
   "Guest": "Tamu",
-  "Internal Server Error": "Kesalahan Internal Server",
-  "&copy; %s %s. All rights reserved": "&copy; %s %s. Hak cipta dilindungi undang-undang"
+  "&copy; %s %s. All rights reserved": "&copy; %s %s. Hak cipta dilindungi undang-undang",
+  "No view engine available": ""
 }

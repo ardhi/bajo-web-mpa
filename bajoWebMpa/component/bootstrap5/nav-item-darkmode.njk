@@ -1,4 +1,0 @@
-{% set darkMode = getLocals('_meta.darkMode') %}
-{% cmp 'navItem',
-    href='?dark=' + (darkMode === 'light')|ternary('true', 'false'),
-    icon=(darkMode === 'light')|ternary('modeDark', 'modeLight') %}{% endcmp %}
