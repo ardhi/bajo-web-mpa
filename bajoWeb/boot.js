@@ -1,7 +1,7 @@
 import decorate from '../lib/decorate.js'
 import buildRoutes from '../lib/build-routes.js'
 import collectViews from '../lib/collect-views.js'
-// import subApp from '../lib/sub-app.js'
+import subApp from '../lib/sub-app.js'
 import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
 
@@ -32,10 +32,10 @@ const boot = {
       await error.call(this, ctx)
       await collectViews.call(this, ctx)
       await decorate.call(this, ctx)
-      // await subApp.call(this, ctx)
       await runHook(`${this.name}:beforeCreateRoutes`, ctx)
       await buildRoutes.call(this, ctx, prefix)
       await runHook(`${this.name}:afterCreateRoutes`, ctx)
+      await subApp.call(this, ctx)
       await notFound.call(this, ctx)
     }, { prefix })
   }
