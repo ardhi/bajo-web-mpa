@@ -6,7 +6,7 @@ Plugin name: **bajoWebMpa**, alias: **mpa**
 
 > <br />**Attention**: I do NOT accept any pull request at the moment, thanks!<br /><br />
 
-Multi Pages App in Web framework for [Bajo Framework](https://github.com/ardhi/bajo).
+Multi Pages App for [Bajo](https://github.com/ardhi/bajo)'s Web Framework.
 
 ## Installation
 
