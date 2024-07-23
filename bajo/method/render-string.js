@@ -1,14 +1,8 @@
-import * as emoji from 'node-emoji'
-
-async function render (text, params = {}, { parseMarkdown = true } = {}) {
-  const { find } = this.app.bajo.lib._
-  const viewEngine = find(this.viewEngines, ve => ve.name)
-  if (!viewEngine) throw this.error('No view engine available')
-  let content = text
-  if (parseMarkdown && this.app.bajoMarkdown) content = this.app.bajoMarkdown.parse(content)
-  content = await this.app[viewEngine.ns].renderString(text, params)
-  if (this.config.emoji.enabled) content = emoji.emojify(content)
-  return content
+async function renderString (text, params = {}, opts = {}) {
+  const ve = this.getViewEngine(opts.ext)
+  if (ve.renderString) text = await ve.renderString.call(this.app[ve.ns], text, params, opts)
+  else text = await this.app[ve.ns].renderString(text, params, opts)
+  return await this.applyFormat(text, ve, opts.ext, opts)
 }
 
-export default render
+export default renderString

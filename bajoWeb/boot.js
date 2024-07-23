@@ -1,6 +1,6 @@
 import decorate from '../lib/decorate.js'
 import buildRoutes from '../lib/build-routes.js'
-import collectViews from '../lib/collect-views.js'
+import collectViewEngines from '../lib/collect-view-engines.js'
 import subApp from '../lib/sub-app.js'
 import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
@@ -30,7 +30,7 @@ const boot = {
       await handleMultipart.call(this, ctx, cfg.multipart)
       await routeHook.call(this, this.name)
       await error.call(this, ctx)
-      await collectViews.call(this, ctx)
+      await collectViewEngines.call(this, ctx)
       await decorate.call(this, ctx)
       await runHook(`${this.name}:beforeCreateRoutes`, ctx)
       await buildRoutes.call(this, ctx, prefix)

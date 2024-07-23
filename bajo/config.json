@@ -4,44 +4,33 @@
   "prefix": "",
   "mountAppAsRoot": true,
   "charset": "utf-8",
-  "viewEngine": "",
+  "defViewEngine": "lodash",
   "theme": "bootstrap5",
   "darkMode": {
     "preset": "light",
     "qsKey": "dark"
   },
-  "formatTagResult": true,
-  "nunjucks": {
-    "noCache": true
-  },
   "i18n": {
     "detectors": ["qs"],
     "defaultNs": ["bajoDb", "bajoWebMpa"]
   },
-  "emoji": {
-    "enabled": true
-  },
+  "emoji": true,
+  "componentName": true,
   "prettier": {
-    "enabled": true,
-    "options": {
-      "parser": "html",
-      "printWidth": 1000
-    }
+    "parser": "html",
+    "printWidth": 1000
   },
   "minify": {
-    "enabled": false,
-    "options": {
-      "removeAttributeQuotes": true,
-      "removeComments": true,
-      "removeCommentsFromCDATA": true,
-      "removeCDATASectionsFromCDATA": true,
-      "collapseWhitespace": true,
-      "conservativeCollapse": true,
-      "decodeEntities": true,
-      "collapseBooleanAttributes": true,
-      "removeRedundantAttributes": true,
-      "removeEmptyAttributes": true
-    }
+    "removeAttributeQuotes": true,
+    "removeComments": true,
+    "removeCommentsFromCDATA": true,
+    "removeCDATASectionsFromCDATA": true,
+    "collapseWhitespace": true,
+    "conservativeCollapse": true,
+    "decodeEntities": true,
+    "collapseBooleanAttributes": true,
+    "removeRedundantAttributes": true,
+    "removeEmptyAttributes": true
   },
   "markdown": {
     "tableClass": "table my-3",
@@ -62,18 +51,5 @@
   "rateLimit": false,
   "traceNoTemplate": false,
   "disabled": [],
-  "virtuals": {
-    "jquery": true,
-    "prismjs": true,
-    "bs5": true,
-    "bs4": false,
-    "icons": true,
-    "masonry": true,
-    "highlightjs": false,
-    "imagesloaded": true,
-    "bootbox": true,
-    "tempusDominus": true,
-    "echarts": false
-  },
   "dependencies": ["bajo-web", "bajo-web-static"]
 }

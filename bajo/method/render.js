@@ -1,19 +1,13 @@
 import path from 'path'
-import { minify } from 'html-minifier-terser'
-import * as prettier from 'prettier'
-import * as emoji from 'node-emoji'
 
-async function render (name, params, reply) {
-  const { find } = this.app.bajo.lib._
-  const ext = path.extname(name)
-  const viewEngine = find(this.viewEngines, ve => ve.fileExts.includes(ext))
-  if (!viewEngine) throw this.error('No view engine available')
-  let content = await this.app[viewEngine.ns].render(name, params, reply)
-  const exts = ['.html', ...viewEngine.fileExts]
-  if (this.config.emoji.enabled && exts.includes(ext)) content = emoji.emojify(content)
-  if (this.config.prettier.enabled && exts.includes(ext)) content = await prettier.format(content, this.config.prettier.options)
-  if (this.config.minify.enabled && ['.js', '.css', ...exts].includes(ext)) content = minify(content, this.config.minify.options)
-  return content
+async function render (tplFile, params = {}, reply, opts = {}) {
+  const ext = path.extname(tplFile)
+  const ve = this.getViewEngine(ext)
+  let text
+  if (ve.render) text = await ve.render.call(this.app[ve.ns], tplFile, params, reply, opts)
+  else text = await this.app[ve.ns].render(tplFile, params, reply, opts)
+  if (ext === '.md') opts.markdown = true
+  return await this.applyFormat(text, ve, ext, opts)
 }
 
 export default render
