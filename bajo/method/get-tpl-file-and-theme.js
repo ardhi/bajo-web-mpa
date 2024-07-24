@@ -38,9 +38,9 @@ function getTplFileAndTheme (item) {
       }
     })
   }
-  if (file) cache[item] = { file, theme }
+  if (file) cache[item] = { file, theme, ns }
   else file = check
-  return { file, theme }
+  return { file, theme, ns }
 }
 
 export default getTplFileAndTheme

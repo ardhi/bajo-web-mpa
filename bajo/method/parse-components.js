@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio'
 const tmpPrefix = 'xcx:'
 const namespace = 'c:'
 
-function replaceTag (el, cmp) {
+async function replaceTag (el, cmp, reply) {
   const { forOwn, isEmpty, isArray, isPlainObject, isString } = this.app.bajo.lib._
 
   let tag = el.name.slice(2)
@@ -15,7 +15,7 @@ function replaceTag (el, cmp) {
   if (isString(params.attr.class)) params.attr.class = this.stringToArray(params.attr.class)
   if (isString(params.attr.style)) params.attr.style = this.stringToObject(params.attr.style)
   let attrs = []
-  const result = cmp.buildTag(tag, params)
+  const result = await cmp.buildTag(tag, params, reply)
   if (result) {
     if (this.config.component.insertCtag) attrs.push(`ctag="${namespace}${tag}"`)
     params = result
@@ -30,29 +30,35 @@ function replaceTag (el, cmp) {
   })
   attrs = attrs.join(' ')
   if (!isEmpty(attrs)) attrs = ' ' + attrs
-
-  if (params.selfClose) cmp.$(el).replaceWith(`<${prefix}${tag}${attrs} />`)
+  if (params.noTag) cmp.$(el).replaceWith(params.html)
+  else if (params.selfClose) cmp.$(el).replaceWith(`<${prefix}${tag}${attrs} />`)
   else cmp.$(el).replaceWith(`<${prefix}${tag}${attrs}>` + params.html + `</${prefix}${tag}>`)
 }
 
-function walk (el, cmp) {
+async function walk (el, cmp, reply) {
   const me = this
   const children = cmp.$(el).children()
   if (children.length > 0) {
-    cmp.$(children).each(function () {
-      walk.call(me, this, cmp)
-      if (this.name.startsWith(namespace)) replaceTag.call(me, this, cmp)
-    })
+    for (const child of children) {
+      await walk.call(me, child, cmp, reply)
+      if (child.name.startsWith(namespace)) await replaceTag.call(me, child, cmp, reply)
+    }
   }
 }
 
-async function parseComponents (text, ve) {
+async function parseComponents (text, ve, reply) {
   if (!this.config.component || !ve.createComponent) return text
 
-  const $ = cheerio.load(text)
+  const $ = cheerio.load(text, {
+    xml: {
+      xmlMode: true,
+      decodeEntities: true
+    }
+  })
   const cmp = ve.createComponent($)
-  walk.call(this, $('*'), cmp)
-  text = $.html()
+  await walk.call(this, $('html'), cmp, reply)
+  $('html').attr('lang', reply.request.lang)
+  text = $.root().html()
   text = text.replaceAll(tmpPrefix, namespace)
   return text
 }
