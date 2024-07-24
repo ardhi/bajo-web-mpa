@@ -3,52 +3,55 @@ import * as cheerio from 'cheerio'
 const tmpPrefix = 'xcx:'
 const namespace = 'c:'
 
-function replaceTag (el, $, ve) {
-  const { camelCase, get, forOwn, isEmpty } = this.app.bajo.lib._
+function replaceTag (el, cmp) {
+  const { forOwn, isEmpty, isArray, isPlainObject, isString } = this.app.bajo.lib._
 
   let tag = el.name.slice(2)
   let prefix = tmpPrefix
-  const params = {
-    html: $(el).html(),
+  let params = {
+    html: cmp.$(el).html(),
     attr: el.attribs ?? {}
   }
-  params.attr.class = this.stringToArray(params.attr.class)
-  params.attr.style = this.stringToObject(params.attr.style)
-  const cmpMethod = get(this, `app.${ve.ns}.component.${camelCase(tag)}`)
+  if (isString(params.attr.class)) params.attr.class = this.stringToArray(params.attr.class)
+  if (isString(params.attr.style)) params.attr.style = this.stringToObject(params.attr.style)
   let attrs = []
-  if (cmpMethod) {
-    if (this.config.componentName) attrs.push(`mpac="${tag}"`)
-    cmpMethod(params, el, $, ve)
+  const result = cmp.buildTag(tag, params)
+  if (result) {
+    if (this.config.component.insertCtag) attrs.push(`ctag="${namespace}${tag}"`)
+    params = result
     prefix = ''
-    tag = params.tag ?? tag
+    tag = params.tag ?? this.config.component.defaultTag
   }
-  params.attr.class = this.arrayToString(params.attr.class)
-  params.attr.style = this.objectToString(params.attr.style)
   forOwn(params.attr, (v, k) => {
     if (isEmpty(v)) return undefined
+    if (isArray(v)) v = this.arrayToString(v)
+    if (isPlainObject(v)) v = this.objectToString(v)
     attrs.push(`${k}="${v}"`)
   })
   attrs = attrs.join(' ')
   if (!isEmpty(attrs)) attrs = ' ' + attrs
 
-  if (params.selfClose) $(el).replaceWith(`<${prefix}${tag}${attrs} />`)
-  else $(el).replaceWith(`<${prefix}${tag}${attrs}>` + params.html + `</${prefix}${tag}>`)
+  if (params.selfClose) cmp.$(el).replaceWith(`<${prefix}${tag}${attrs} />`)
+  else cmp.$(el).replaceWith(`<${prefix}${tag}${attrs}>` + params.html + `</${prefix}${tag}>`)
 }
 
-function walk (el, $, ve) {
+function walk (el, cmp) {
   const me = this
-  const children = $(el).children()
+  const children = cmp.$(el).children()
   if (children.length > 0) {
-    $(children).each(function () {
-      walk.call(me, this, $, ve)
-      if (this.name.startsWith(namespace)) replaceTag.call(me, this, $, ve)
+    cmp.$(children).each(function () {
+      walk.call(me, this, cmp)
+      if (this.name.startsWith(namespace)) replaceTag.call(me, this, cmp)
     })
   }
 }
 
 async function parseComponents (text, ve) {
+  if (!this.config.component || !ve.createComponent) return text
+
   const $ = cheerio.load(text)
-  walk.call(this, $('*'), $, ve)
+  const cmp = ve.createComponent($)
+  walk.call(this, $('*'), cmp)
   text = $.html()
   text = text.replaceAll(tmpPrefix, namespace)
   return text

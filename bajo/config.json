@@ -15,7 +15,10 @@
     "defaultNs": ["bajoDb", "bajoWebMpa"]
   },
   "emoji": true,
-  "componentName": true,
+  "component": {
+    "insertCtag": true,
+    "defaultTag": "div"
+  },
   "prettier": {
     "parser": "html",
     "printWidth": 1000
