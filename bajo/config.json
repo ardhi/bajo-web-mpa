@@ -4,8 +4,6 @@
   "prefix": "",
   "mountAppAsRoot": true,
   "charset": "utf-8",
-  "defViewEngine": "lodash",
-  "theme": "bootstrap5",
   "darkMode": {
     "preset": "light",
     "qsKey": "dark"
@@ -15,9 +13,17 @@
     "defaultNs": ["bajoDb", "bajoWebMpa"]
   },
   "emoji": true,
-  "component": {
-    "insertCtag": true,
-    "defaultTag": "div"
+  "viewEngine": {
+    "default": "default",
+    "cacheMaxAge": 300
+  },
+  "theme": {
+    "autoInsert": ["css", "meta"],
+    "component": {
+      "insertCtag": false,
+      "defaultTag": "div",
+      "cacheMaxAge": 300
+    }
   },
   "prettier": {
     "parser": "html",

@@ -1,8 +1,9 @@
 import decorate from '../lib/decorate.js'
 import buildRoutes from '../lib/build-routes.js'
 import collectViewEngines from '../lib/collect-view-engines.js'
+import collectThemes from '../lib/collect-themes.js'
 import subApp from '../lib/sub-app.js'
-import notFound from '../lib/not-found.js'
+// import notFound from '../lib/not-found.js'
 import error from '../lib/error.js'
 
 const boot = {
@@ -31,12 +32,13 @@ const boot = {
       await routeHook.call(this, this.name)
       await error.call(this, ctx)
       await collectViewEngines.call(this, ctx)
+      await collectThemes.call(this, ctx)
       await decorate.call(this, ctx)
       await runHook(`${this.name}:beforeCreateRoutes`, ctx)
       await buildRoutes.call(this, ctx, prefix)
       await runHook(`${this.name}:afterCreateRoutes`, ctx)
       await subApp.call(this, ctx)
-      await notFound.call(this, ctx)
+      // await notFound.call(this, ctx)
     }, { prefix })
   }
 }

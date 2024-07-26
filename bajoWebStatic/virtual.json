@@ -1,0 +1,7 @@
+[{
+  "prefix": "purecss",
+  "root": "node_modules/purecss/build"
+}, {
+  "prefix": "fa-free",
+  "root": "node_modules/@fortawesome/fontawesome-free"
+}]

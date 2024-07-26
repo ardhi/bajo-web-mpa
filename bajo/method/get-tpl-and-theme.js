@@ -2,7 +2,7 @@ import _path from 'path'
 
 const cache = {}
 
-function getTplFileAndTheme (item) {
+function getTplAndTheme (item = '') {
   if (cache[item]) return cache[item]
   const { getPluginDataDir } = this.app.bajo
   const { fs } = this.app.bajo.lib
@@ -21,7 +21,7 @@ function getTplFileAndTheme (item) {
   let check
   // check override
   each(types, type => {
-    check = `${getPluginDataDir(ns)}/${ve.plugin.name}/template/${type}/${path}`
+    check = `${getPluginDataDir(ns)}/${ve.plugin.name}/view-engine/template/${type}/${path}`
     if (fs.existsSync(check)) {
       file = check
       return false
@@ -31,7 +31,7 @@ function getTplFileAndTheme (item) {
   if (!file) {
     if (this.config.traceNoTemplate) this.log.trace('Can\'t find template override: %s (%s)', check, item)
     each(types, type => {
-      check = `${this.app[ns].config.dir.pkg}/${ve.plugin.name}/template/${type}/${path}`
+      check = `${this.app[ns].config.dir.pkg}/${ve.plugin.name}/view-engine/template/${type}/${path}`
       if (fs.existsSync(check)) {
         file = check
         return false
@@ -43,4 +43,4 @@ function getTplFileAndTheme (item) {
   return { file, theme, ns }
 }
 
-export default getTplFileAndTheme
+export default getTplAndTheme

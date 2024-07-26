@@ -6,7 +6,7 @@ async function render (tplFile, params = {}, reply, opts = {}) {
   const viewEngine = this.getViewEngine(ext)
   const text = await viewEngine.render(tplFile, params, reply, opts)
   if (ext === '.md') opts.markdown = true
-  return applyFormat.call(this, { text, viewEngine, ext, opts, reply })
+  return applyFormat.call(this, { text, ext, opts, reply })
 }
 
 export default render

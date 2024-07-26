@@ -27,9 +27,11 @@
   },
   "homepage": "https://github.com/ardhi/bajo-web-mpa#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "cheerio": "^1.0.0-rc.12",
     "html-minifier-terser": "^7.2.0",
     "node-emoji": "^2.1.3",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "purecss": "^3.0.0"
   }
 }
