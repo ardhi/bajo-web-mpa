@@ -1,7 +1,6 @@
 import path from 'path'
 
 async function theme (ctx) {
-  const { virtualDir } = this.app.bajoWebStatic
   const { importModule } = this.app.bajo
   const { camelCase } = this.app.bajo.lib._
   const { fastGlob } = this.app.bajo.lib
@@ -13,13 +12,9 @@ async function theme (ctx) {
     component[key] = await importModule(file)
   }
 
-  const dir = virtualDir(this.name)
   const css = [
-    dir + '/purecss/pure-min.css',
-    dir + '/fa-free/css/fontawesome.min.css',
-    dir + '/fa-free/css/regular.min.css',
-    dir + '/fa-free/css/brands.min.css',
-    dir + '/fa-free/css/solid.min.css'
+    'bajoWebMpa.virtual:/purecss/pure-min.css',
+    'bajoWebMpaFontawesome.load:/bajoWebMpa/theme/css.json'
   ]
   const meta = [{
     name: 'viewport',
