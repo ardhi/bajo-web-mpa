@@ -18,7 +18,7 @@
     "cacheMaxAge": 300
   },
   "theme": {
-    "autoInsert": ["css", "meta"],
+    "autoInsert": ["css", "meta", "scripts"],
     "component": {
       "insertCtag": false,
       "defaultTag": "div",

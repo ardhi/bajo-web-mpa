@@ -16,6 +16,9 @@ async function theme (ctx) {
     'bajoWebMpa.virtual:/purecss/pure-min.css',
     'bajoWebMpaFontawesome.load:/bajoWebMpa/theme/css.json'
   ]
+  const scripts = [
+    'bajoWebMpaLibs.load:/bajoWebMpa/theme/script.js'
+  ]
   const meta = [{
     name: 'viewport',
     content: 'width=device-width, initial-scale=1'
@@ -24,6 +27,7 @@ async function theme (ctx) {
     name: 'default',
     component,
     css,
+    scripts,
     meta
   }
 }
